@@ -21,7 +21,7 @@
                           <columns>
                             <TableColumn fx:id="actorFirstname" prefWidth="75.0" text="First name" />
                             <TableColumn fx:id="actorLastname" prefWidth="75.0" text="Last name" />
-                              <TableColumn fx:id="actorlastUpdate" prefWidth="75.0" text="Last Updated" />
+                              <TableColumn fx:id="actorlastUpdate" prefWidth="145.0" text="Last Updated" />
                           </columns>
                         </TableView>
                         <HBox layoutY="352.0" prefHeight="91.0" prefWidth="705.0">

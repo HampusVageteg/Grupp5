@@ -11,13 +11,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.sql.Timestamp;
-import java.time.*;
 
 public class MainController {
 
     ActorDAO acDAO = new ActorDAO();
-    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-
 
     @FXML
     private TableColumn<Actor, String> actorFirstname;
@@ -26,7 +23,7 @@ public class MainController {
     private TableColumn<Actor, String> actorLastname;
 
     @FXML
-    private TableColumn<Actor, String> actorlastUpdate;
+    private TableColumn<Actor, Timestamp> actorlastUpdate;
 
     @FXML
     private TextField actorFirstnametxt, actorLastnametxt;
@@ -37,27 +34,21 @@ public class MainController {
     @FXML
     private TableView actorTableView;
 
-
-
-
     @FXML
     void getActors(MouseEvent event) {
-
-
-
         actorFirstname.setCellValueFactory(new PropertyValueFactory<Actor, String>("firstName"));
         actorLastname.setCellValueFactory(new PropertyValueFactory<Actor, String>("lastName"));
+        actorlastUpdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+
         actorTableView.getItems().addAll(acDAO.readAsList());
     }
 
     @FXML
     void addActor(MouseEvent event) {
-
         Actor actor = new Actor();
 
         actor.setFirstName(actorFirstnametxt.getText());
         actor.setLastName(actorLastnametxt.getText());
-        actor.setLastUpdate(actorlastUpdate.));
 
         acDAO.create(actor);
 
