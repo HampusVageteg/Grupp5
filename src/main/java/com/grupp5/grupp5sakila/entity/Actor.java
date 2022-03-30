@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "actor")
@@ -19,11 +20,15 @@ public class Actor {
     @Column(name = "last_name", nullable = false, length = 45)
     private String lastName;
 
-    @Column(name = "last_update", nullable = false)
-    private Instant lastUpdate;
+    @Column(name = "last_update")
+    private Timestamp lastUpdate;
 
     @OneToMany(mappedBy = "actor")
     private Set<FilmActor> filmActors = new LinkedHashSet<>();
+
+    public Actor() {
+
+    }
 
     public Set<FilmActor> getFilmActors() {
         return filmActors;
@@ -33,11 +38,11 @@ public class Actor {
         this.filmActors = filmActors;
     }
 
-    public Instant getLastUpdate() {
+    public Timestamp getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Instant lastUpdate) {
+    public void setLastUpdate(Timestamp lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
