@@ -7,13 +7,29 @@
         <property name="connection.url">jdbc:mysql://localhost/sakila?serverTimezone=UTC</property>
         <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">root93</property>
+        <property name="connection.password">Areyou1?</property>
         <property name="connection.pool_size">3</property>
         <property name="current_session_context_class">thread</property>
         <property name="hibernate.enhancer.enableLazyInitialization">true</property>
         <property name="show_sql">true</property>
         <property name="format_sql">false</property>
         <property name="hbm2ddl.auto">update</property>
+
+        <mapping class="com.grupp5.grupp5sakila.entity.Actor" />
+        <mapping class="com.grupp5.grupp5sakila.entity.FilmActor"/>
+        <mapping class="com.grupp5.grupp5sakila.entity.Address" />
+        <mapping class="com.grupp5.grupp5sakila.entity.Film" />
+        <mapping class="com.grupp5.grupp5sakila.entity.FilmActorId" />
+        <mapping class="com.grupp5.grupp5sakila.entity.FilmCategory" />
+        <mapping class="com.grupp5.grupp5sakila.entity.FilmCategoryId" />
+        <mapping class="com.grupp5.grupp5sakila.entity.FilmText" />
+        <mapping class="com.grupp5.grupp5sakila.entity.Payment" />
+        <mapping class="com.grupp5.grupp5sakila.entity.Staff" />
+        <mapping class="com.grupp5.grupp5sakila.entity.Inventory" />
+        <mapping class="com.grupp5.grupp5sakila.entity.Store" />
+        <mapping class="com.grupp5.grupp5sakila.entity.City" />
+        <mapping class="com.grupp5.grupp5sakila.entity.Customer" />
+        <mapping class="com.grupp5.grupp5sakila.entity.Rental" />
 
 <!--        <mapping class="com.coolfilm.movieapp.entity.Film"/>-->
 <!--        <mapping class="com.coolfilm.movieapp.entity.FilmFavourite"/>-->

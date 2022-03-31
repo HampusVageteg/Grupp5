@@ -7,51 +7,59 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="691.0" prefWidth="1037.0" style="-fx-background-color: #11343a;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupp5.grupp5sakila.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="691.0" prefWidth="1037.0" style="-fx-background-color: #11343a;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupp5.grupp5sakila.MainController">
    <children>
-      <TabPane layoutX="197.0" layoutY="59.0" prefHeight="507.0" prefWidth="705.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="197.0" layoutY="59.0" prefHeight="507.0" prefWidth="705.0" style="-fx-background-color: #0b2125;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="actorTab" text="Actor">
+          <Tab fx:id="actorTab" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-min-width: 20;" text="Actor">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
                      <children>
-                        <TableView fx:id="actorTableView" prefHeight="352.0" prefWidth="705.0">
+                        <TableView fx:id="actorTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="705.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
                           <columns>
-                            <TableColumn fx:id="actorFirstname" prefWidth="75.0" text="First name" />
-                            <TableColumn fx:id="actorLastname" prefWidth="75.0" text="Last name" />
-                              <TableColumn fx:id="actorlastUpdate" prefWidth="145.0" text="Last Updated" />
+                            <TableColumn fx:id="actorFirstname" editable="false" maxWidth="235.0" prefWidth="235.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="First name" />
+                            <TableColumn fx:id="actorLastname" editable="false" maxWidth="235.0" prefWidth="235.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Last name" />
+                              <TableColumn fx:id="actorlastUpdate" editable="false" maxWidth="233.0" prefWidth="233.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last Updated" />
                           </columns>
                         </TableView>
-                        <HBox layoutY="352.0" prefHeight="91.0" prefWidth="705.0">
-                           <children>
-                              <Button mnemonicParsing="false" onMouseClicked="#getActors" text="Get Data" />
-                              <Button mnemonicParsing="false" onMouseClicked="#updateActor" text="Update Data" />
-                              <Button mnemonicParsing="false" onMouseClicked="#deleteActor" text="Delete Data" />
-                              <TextField fx:id="actorFirstnametxt" />
-                              <TextField fx:id="actorLastnametxt" />
-                              <Button mnemonicParsing="false" onMouseClicked="#addActor" text="Add Data" />
-                           </children>
-                        </HBox>
+                        <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
+                        <Button layoutX="624.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#addActor" text="Add Data" />
+                        <TextField fx:id="actorLastnametxt" layoutX="170.0" layoutY="385.0" />
+                        <TextField fx:id="actorFirstnametxt" layoutX="8.0" layoutY="385.0" />
+                        <Button layoutX="537.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#deleteActor" text="Delete Data" />
+                        <Button layoutX="433.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateActor" text="Update Data" />
+                        <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getActors" text="Get Data" />
+                        <Button layoutX="8.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#editCurrentActor" text="Edit selected" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab style="-fx-background-color: #061315;" text="Tab 2">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Tab fx:id="customerTab" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Customers">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
                      <children>
-                        <TableView prefHeight="353.0" prefWidth="637.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                          </columns>
+                        <TableView fx:id="customerTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="705.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
+                           <columns>
+                              <TableColumn fx:id="customerFirstname" editable="false" maxWidth="235.0" prefWidth="169.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="First name" />
+                              <TableColumn fx:id="customerLastname" editable="false" maxWidth="301.0" prefWidth="169.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Last name" />
+                              <TableColumn fx:id="customerEmail" editable="false" maxWidth="362.0" prefWidth="200.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Email" />
+                              <TableColumn fx:id="customerLastUpdate" editable="false" maxWidth="453.0" prefWidth="166.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last Updated" />
+                           </columns>
                         </TableView>
+                        <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
+                        <Button layoutX="624.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#addCustomer" text="Add Data" />
+                        <TextField fx:id="customerLastnametxt" layoutX="170.0" layoutY="385.0" />
+                        <TextField fx:id="customerFirstnametxt" layoutX="8.0" layoutY="385.0" />
+                        <Button layoutX="537.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#deleteCustomer" text="Delete Data" />
+                        <Button layoutX="433.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateCustomer" text="Update Data" />
+                        <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getCustomers" text="Get Data" />
+                        <Button layoutX="8.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#editCurrentCustomer" text="Edit selected" />
+                        <TextField fx:id="customerEmailtxt" layoutX="170.0" layoutY="413.0" />
                      </children>
                   </AnchorPane>
-            </content>
-          </Tab>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
    </children>

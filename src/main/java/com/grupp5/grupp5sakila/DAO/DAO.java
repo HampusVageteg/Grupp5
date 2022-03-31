@@ -9,9 +9,9 @@ public interface DAO <L>{
 
     List<L> readAsList();
 
-    void update(int id);
+    void update(L data);
 
-    void delete(int id);
+    void delete(L data);
 
 
 

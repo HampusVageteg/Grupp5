@@ -1,0 +1,11 @@
+.tab-header-background {
+    -fx-background-color:  #11343a;
+}
+.tab {
+    -fx-text-background-color: #FFFFFF;
+    -fx-pref-width: 50;
+}
+
+.tab-pane{
+    -fx-padding: 0 -1 -1 -1;
+}

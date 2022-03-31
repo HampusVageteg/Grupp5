@@ -37,14 +37,22 @@ public class ActorDAO implements DAO<Actor>{
     }
 
     @Override
-    public void update(int id) {
+    public void update(Actor data) {
         Session session = dbSession.startSession();
+        Actor actor = session.get(Actor.class, data.getId());
 
-
+        actor.setFirstName(data.getFirstName());
+        actor.setLastName(data.getLastName());
+        session.update(actor);
+        dbSession.endSession(session);
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Actor data) {
+        Session session = dbSession.startSession();
+        Actor actor = session.get(Actor.class, data.getId());
+        session.delete(actor);
+        dbSession.endSession(session);
 
     }
 }
