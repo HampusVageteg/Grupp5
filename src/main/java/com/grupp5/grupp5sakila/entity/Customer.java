@@ -30,14 +30,15 @@ public class Customer {
     private String email;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "address_id", nullable = false)
+    @JoinColumn(name = "address_id")
     private Address address;
 
     @Column(name = "active", nullable = false)
     private Boolean active = false;
 
+    @UpdateTimestamp
     @Column(name = "create_date", nullable = false)
-    private Instant createDate;
+    private Timestamp createDate;
 
     @UpdateTimestamp
     @Column(name = "last_update")
@@ -51,6 +52,13 @@ public class Customer {
 
     public Customer() {
 
+    }
+
+    public Customer(String firstName, String lastName, String email, Address address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.address = address;
     }
 
     public Set<Rental> getRentals() {
@@ -77,11 +85,11 @@ public class Customer {
         this.lastUpdate = lastUpdate;
     }
 
-    public Instant getCreateDate() {
+    public Timestamp getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Instant createDate) {
+    public void setCreateDate(Timestamp createDate) {
         this.createDate = createDate;
     }
 

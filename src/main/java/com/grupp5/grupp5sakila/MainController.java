@@ -1,15 +1,15 @@
 package com.grupp5.grupp5sakila;
 
 import com.grupp5.grupp5sakila.DAO.ActorDAO;
+import com.grupp5.grupp5sakila.DAO.AddressDAO;
 import com.grupp5.grupp5sakila.DAO.CustomerDAO;
 import com.grupp5.grupp5sakila.entity.Actor;
+import com.grupp5.grupp5sakila.entity.Address;
 import com.grupp5.grupp5sakila.entity.Customer;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
@@ -20,6 +20,7 @@ public class MainController {
 
     ActorDAO acDAO = new ActorDAO();
     CustomerDAO cusDAO = new CustomerDAO();
+    AddressDAO adDAO = new AddressDAO();
 
     @FXML
     private TableView<Actor> actorTableView = new TableView<>();
@@ -48,6 +49,11 @@ public class MainController {
     @FXML
     private TableColumn<Customer, Timestamp> customerLastUpdate;
 
+    @FXML
+    private TableColumn<Customer, Timestamp> customerCreated;
+
+    @FXML
+    private ChoiceBox<Address> addressChoice;
 
 
     @FXML
@@ -61,6 +67,8 @@ public class MainController {
 
   /*  @FXML
     private TableView actorTableView;*/
+
+    ObservableList<Address> customerAdressChoice = FXCollections.observableArrayList();
 
 
     @FXML
@@ -111,17 +119,31 @@ public class MainController {
 
     @FXML
     void addCustomer(MouseEvent event) {
+        Customer customer = new Customer(customerFirstnametxt.getText(),customerLastnametxt.getText(),customerEmailtxt.getText(), addressChoice.getValue());
 
+//        customer.setFirstName(customerFirstnametxt.getText());
+//        customer.setLastName(customerLastnametxt.getText());
+//        customer.setEmail(customerEmailtxt.getText());
+
+        cusDAO.create(customer);
+        customerTableView.setItems(FXCollections.observableArrayList(cusDAO.readAsList()));
     }
 
     @FXML
     void editCurrentCustomer(MouseEvent event) {
-
+        Customer customer = customerTableView.getSelectionModel().getSelectedItem();
+        customerFirstnametxt.setText(customer.getFirstName());
+        customerLastnametxt.setText(customer.getLastName());
     }
 
     @FXML
     void updateCustomer(MouseEvent event) {
-
+        Customer customer = new Customer();
+        customer.setId(customerTableView.getSelectionModel().getSelectedItem().getId());
+        customer.setFirstName(customerFirstnametxt.getText());
+        customer.setLastName(customerLastnametxt.getText());
+        cusDAO.update(customer);
+        customerTableView.setItems(FXCollections.observableArrayList(cusDAO.readAsList()));
     }
 
 
@@ -131,13 +153,18 @@ public class MainController {
         customerLastname.setCellValueFactory(new PropertyValueFactory<Customer, String>("lastName"));
         customerEmail.setCellValueFactory(new PropertyValueFactory<Customer, String>("email"));
         customerLastUpdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+        customerCreated.setCellValueFactory(new PropertyValueFactory<>("createDate"));
 
         customerTableView.getItems().addAll(cusDAO.readAsList());
+        customerAdressChoice.addAll(adDAO.readAsList());
+        addressChoice.setItems(customerAdressChoice);
     }
 
     @FXML
     void deleteCustomer(MouseEvent event) {
-
+        Customer customer = customerTableView.getSelectionModel().getSelectedItem();
+        cusDAO.delete(customer);
+        customerTableView.setItems(FXCollections.observableArrayList(cusDAO.readAsList()));
     }
 
 }
