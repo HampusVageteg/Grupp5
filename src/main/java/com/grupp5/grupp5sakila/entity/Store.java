@@ -1,7 +1,5 @@
 package com.grupp5.grupp5sakila.entity;
 
-import org.hibernate.annotations.UpdateTimestamp;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.LinkedHashSet;
@@ -23,7 +21,6 @@ public class Store {
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
-    @UpdateTimestamp
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
 
@@ -36,54 +33,12 @@ public class Store {
     @OneToMany(mappedBy = "store")
     private Set<Customer> customers = new LinkedHashSet<>();
 
-    public Store(Staff managerStaff, Address address, Timestamp lastUpdate) {
-        this.managerStaff = managerStaff;
-        this.address = address;
-        this.lastUpdate = lastUpdate;
+    public Integer getId() {
+        return id;
     }
 
-    public Store(){
-
-    }
-
-    public Set<Customer> getCustomers() {
-        return customers;
-    }
-
-    public void setCustomers(Set<Customer> customers) {
-        this.customers = customers;
-    }
-
-    public Set<Staff> getStaff() {
-        return staff;
-    }
-
-    public void setStaff(Set<Staff> staff) {
-        this.staff = staff;
-    }
-
-    public Set<Inventory> getInventories() {
-        return inventories;
-    }
-
-    public void setInventories(Set<Inventory> inventories) {
-        this.inventories = inventories;
-    }
-
-    public Timestamp getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(Timestamp lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Staff getManagerStaff() {
@@ -94,12 +49,44 @@ public class Store {
         this.managerStaff = managerStaff;
     }
 
-    public Integer getId() {
-        return id;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Timestamp getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Timestamp lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public Set<Inventory> getInventories() {
+        return inventories;
+    }
+
+    public void setInventories(Set<Inventory> inventories) {
+        this.inventories = inventories;
+    }
+
+    public Set<Staff> getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Set<Staff> staff) {
+        this.staff = staff;
+    }
+
+    public Set<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
     }
 
     @Override

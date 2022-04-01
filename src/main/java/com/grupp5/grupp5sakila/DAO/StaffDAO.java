@@ -1,7 +1,6 @@
 package com.grupp5.grupp5sakila.DAO;
 
 import com.grupp5.grupp5sakila.entity.Staff;
-import com.grupp5.grupp5sakila.entity.Store;
 import com.grupp5.grupp5sakila.util.DatabaseSession;
 import org.hibernate.Session;
 
