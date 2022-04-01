@@ -1,14 +1,15 @@
 package com.grupp5.grupp5sakila.entity;
 
-import org.hibernate.annotations.UpdateTimestamp;
-
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "staff")
+@Table(name = "staff", indexes = {
+        @Index(name = "idx_fk_store_id", columnList = "store_id"),
+        @Index(name = "idx_fk_address_id", columnList = "address_id")
+})
 public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +34,7 @@ public class Staff {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "store_id", nullable = false)
-    private Store storeId;
+    private Store test;
 
     @Column(name = "active", nullable = false)
     private Boolean active = false;
@@ -44,9 +45,11 @@ public class Staff {
     @Column(name = "password", length = 40)
     private String password;
 
-    @UpdateTimestamp
     @Column(name = "last_update", nullable = false)
-    private Timestamp lastUpdate;
+    private Instant lastUpdate;
+
+    @Column(name = "store_store_id")
+    private Integer storeStoreId;
 
     @OneToMany(mappedBy = "staff")
     private Set<Payment> payments = new LinkedHashSet<>();
@@ -56,18 +59,6 @@ public class Staff {
 
     @OneToMany(mappedBy = "staff")
     private Set<Rental> rentals = new LinkedHashSet<>();
-
-    public Staff(String firstName, String lastName, Address address, String email, Store storeId) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.email = email;
-        this.storeId = storeId;
-    }
-
-    public Staff(){
-
-    }
 
     public Set<Rental> getRentals() {
         return rentals;
@@ -93,11 +84,19 @@ public class Staff {
         this.payments = payments;
     }
 
-    public Timestamp getLastUpdate() {
+    public Integer getStoreStoreId() {
+        return storeStoreId;
+    }
+
+    public void setStoreStoreId(Integer storeStoreId) {
+        this.storeStoreId = storeStoreId;
+    }
+
+    public Instant getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Timestamp lastUpdate) {
+    public void setLastUpdate(Instant lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
@@ -125,12 +124,12 @@ public class Staff {
         this.active = active;
     }
 
-    public Store getStoreId() {
-        return storeId;
+    public Store getTest() {
+        return test;
     }
 
-    public void setStoreId(Store storeId) {
-        this.storeId = storeId;
+    public void setTest(Store test) {
+        this.test = test;
     }
 
     public String getEmail() {
@@ -180,5 +179,4 @@ public class Staff {
     public void setId(Integer id) {
         this.id = id;
     }
-
 }
