@@ -1,6 +1,12 @@
 package com.grupp5.grupp5sakila.entity;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "city")
@@ -10,12 +16,60 @@ public class City {
     @Column(name = "city_id", nullable = false)
     private Integer id;
 
+    @Column(name = "city", nullable = false, length = 50)
+    private String city;
+
+    @UpdateTimestamp
+    @Column(name = "last_update", nullable = false)
+    private Timestamp lastUpdate;
+
+    @OneToMany(mappedBy = "city")
+    private Set<Address> addresses = new LinkedHashSet<>();
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public City() {
+    }
+
+    public City(String city, Timestamp lastUpdate, Set<Address> addresses) {
+        this.city = city;
+        this.lastUpdate = lastUpdate;
+        this.addresses = addresses;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public Timestamp getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Timestamp lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return city;
     }
 
     //TODO Reverse Engineering! Migrate other columns to the entity
