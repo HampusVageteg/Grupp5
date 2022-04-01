@@ -1,17 +1,21 @@
 package com.grupp5.grupp5sakila.entity;
 
-import org.hibernate.annotations.UpdateTimestamp;
-
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "inventory")
+@Table(name = "inventory", indexes = {
+        @Index(name = "idx_fk_film_id", columnList = "film_id"),
+        @Index(name = "idx_store_id_film_id", columnList = "store_id, film_id")
+})
 public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "inventory_id", nullable = false)
     private Integer id;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "film_id", nullable = false)
     private Film film;
@@ -20,12 +24,26 @@ public class Inventory {
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;
 
-    @UpdateTimestamp
-    @Column(name = "last_update")
-    private Timestamp lastUpdate;
+    @Column(name = "last_update", nullable = false)
+    private Instant lastUpdate;
 
-    public Inventory(){
+    @OneToMany(mappedBy = "inventory")
+    private Set<Rental> rentals = new LinkedHashSet<>();
 
+    public Set<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void setRentals(Set<Rental> rentals) {
+        this.rentals = rentals;
+    }
+
+    public Instant getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Instant lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
     public Store getStore() {
@@ -34,14 +52,6 @@ public class Inventory {
 
     public void setStore(Store store) {
         this.store = store;
-    }
-
-    public Timestamp getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(Timestamp lastUpdate) {
-        this.lastUpdate = lastUpdate;
     }
 
     public Film getFilm() {
@@ -59,6 +69,4 @@ public class Inventory {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    //TODO Reverse Engineering! Migrate other columns to the entity
 }

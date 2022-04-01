@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="JpaBuddyIdeaProjectConfig">
+  <component name="JpaBuddyIdeaProjectConfig" migrateIndexesAndConstraints="true">
     <option name="defaultUnitInitialized" value="true" />
     <option name="reverseEngineeringLastDbConnectionId" value="772eabc7-1ec4-46a9-b7f0-c600b7e3a01e" />
+    <option name="reLastEntityCreationPackage" value="src/main/java/com/grupp5/grupp5sakila/entity" />
+    <option name="newEntityIdStrategy" />
   </component>
 </project>

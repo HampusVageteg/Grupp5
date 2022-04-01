@@ -30,7 +30,7 @@ public class Store {
     @OneToMany(mappedBy = "store")
     private Set<Inventory> inventories = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "store")
+    @OneToMany(mappedBy = "test")
     private Set<Staff> staff = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "store")
@@ -100,5 +100,12 @@ public class Store {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "id=" + id +
+                '}';
     }
 }

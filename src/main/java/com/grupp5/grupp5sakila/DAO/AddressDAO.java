@@ -13,7 +13,17 @@ public class AddressDAO implements DAO<Address>{
 
     @Override
     public void create(Address data) {
+        Session session = dbSession.startSession();
 
+        Address address = new Address();
+        address.setAddress(data.getAddress());
+        address.setDistrict(data.getDistrict());
+        address.setPostalCode(data.getPostalCode());
+        address.setPhone(data.getPhone());
+
+        session.persist(data);
+
+        dbSession.endSession(session);
     }
 
     @Override
@@ -27,11 +37,24 @@ public class AddressDAO implements DAO<Address>{
 
     @Override
     public void update(Address data) {
+        Session session = dbSession.startSession();
 
+        Address address = session.get(Address.class, data.getId());
+        address.setAddress(data.getAddress());
+        address.setDistrict(data.getDistrict());
+        address.setPostalCode(data.getPostalCode());
+        address.setPhone(data.getPhone());
+
+        session.update(address);
+
+        dbSession.endSession(session);
     }
 
     @Override
     public void delete(Address data) {
-
+        Session session = dbSession.startSession();
+       Address address = session.get(Address.class, data.getId());
+        session.delete(address);
+        dbSession.endSession(session);
     }
 }

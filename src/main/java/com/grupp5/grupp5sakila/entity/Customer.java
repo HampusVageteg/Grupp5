@@ -17,7 +17,7 @@ public class Customer {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "store_id", nullable = false)
+    @JoinColumn(name = "store_id")
     private Store store;
 
     @Column(name = "first_name", nullable = false, length = 45)
@@ -54,11 +54,12 @@ public class Customer {
 
     }
 
-    public Customer(String firstName, String lastName, String email, Address address) {
+    public Customer(String firstName, String lastName, String email, Address address, Store store){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.address = address;
+        this.store = store;
     }
 
     public Set<Rental> getRentals() {

@@ -1,11 +1,7 @@
 package com.grupp5.grupp5sakila;
 
-import com.grupp5.grupp5sakila.DAO.ActorDAO;
-import com.grupp5.grupp5sakila.DAO.AddressDAO;
-import com.grupp5.grupp5sakila.DAO.CustomerDAO;
-import com.grupp5.grupp5sakila.entity.Actor;
-import com.grupp5.grupp5sakila.entity.Address;
-import com.grupp5.grupp5sakila.entity.Customer;
+import com.grupp5.grupp5sakila.DAO.*;
+import com.grupp5.grupp5sakila.entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,6 +17,12 @@ public class MainController {
     ActorDAO acDAO = new ActorDAO();
     CustomerDAO cusDAO = new CustomerDAO();
     AddressDAO adDAO = new AddressDAO();
+    StoreDAO storeDAO = new StoreDAO();
+    CityDAO cityDAO = new CityDAO();
+    StaffDAO staffDAO = new StaffDAO();
+    RentalDAO rentalDAO = new RentalDAO();
+    InventoryDAO inventoryDAO = new InventoryDAO();
+
 
     @FXML
     private TableView<Actor> actorTableView = new TableView<>();
@@ -36,6 +38,31 @@ public class MainController {
 
     @FXML
     private TableColumn<Actor, Timestamp> actorlastUpdate;
+
+    @FXML
+    private TableColumn<Address, String> address;
+
+    @FXML
+    private TableColumn<Address, String> addressDistrict;
+
+    @FXML
+    private TextField addressDistrictText, addressPhoneText, addressPostcodeText, addresstext;
+
+    @FXML
+    private TableColumn<Address, Timestamp> addressLastUpdate;
+
+    @FXML
+    private TableColumn<Address, String> addressPhone;
+
+    @FXML
+    private TableColumn<Address, String> addressPostcode;
+
+    @FXML
+    private Tab addressTab;
+
+    @FXML
+    private TableView<Address> addressTableView;
+
 
     @FXML
     private TableColumn<Customer, String> customerFirstname;
@@ -55,6 +82,13 @@ public class MainController {
     @FXML
     private ChoiceBox<Address> addressChoice;
 
+    @FXML
+    private ChoiceBox<Store> storeChoice;
+
+    @FXML
+    private ChoiceBox<City> cityChoiceBox;
+
+
 
     @FXML
     private TextField actorFirstnametxt, actorLastnametxt;
@@ -68,8 +102,9 @@ public class MainController {
   /*  @FXML
     private TableView actorTableView;*/
 
-    ObservableList<Address> customerAdressChoice = FXCollections.observableArrayList();
-
+    ObservableList<Address> customerAdressList = FXCollections.observableArrayList();
+    ObservableList<Store> customerStoreList = FXCollections.observableArrayList();
+    ObservableList<City> cityList = FXCollections.observableArrayList();
 
     @FXML
     void getActors(MouseEvent event) {
@@ -118,13 +153,58 @@ public class MainController {
     }
 
     @FXML
+    void addAddress(MouseEvent event) {
+        Address address = new Address(addresstext.getText(),addressDistrictText.getText(),addressPostcodeText.getText(), addressPhoneText.getText(), cityChoiceBox.getValue());
+        adDAO.create(address);
+        addressTableView.setItems(FXCollections.observableArrayList(adDAO.readAsList()));
+    }
+
+    @FXML
+    void deleteAddress(MouseEvent event) {
+        Address address = addressTableView.getSelectionModel().getSelectedItem();
+        adDAO.delete(address);
+        addressTableView.setItems(FXCollections.observableArrayList(adDAO.readAsList()));
+    }
+
+    @FXML
+    void editCurrentAddress(MouseEvent event) {
+        Address address = addressTableView.getSelectionModel().getSelectedItem();
+        addresstext.setText(address.getAddress());
+        addressDistrictText.setText(address.getDistrict());
+        addressPostcodeText.setText(address.getPostalCode());
+        addressPhoneText.setText(address.getPhone());
+
+    }
+
+    @FXML
+    void getAddresses(MouseEvent event) {
+        address.setCellValueFactory(new PropertyValueFactory<>("address"));
+        addressDistrict.setCellValueFactory(new PropertyValueFactory<>("district"));
+        addressPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        addressPostcode.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        addressLastUpdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+
+        addressTableView.getItems().addAll(adDAO.readAsList());
+        cityList.addAll(cityDAO.readAsList());
+        cityChoiceBox.setItems(cityList);
+    }
+
+    @FXML
+    void updateAddress(MouseEvent event) {
+
+        Address address = new Address();
+        address.setId(addressTableView.getSelectionModel().getSelectedItem().getId());
+        address.setAddress(addresstext.getText());
+        address.setDistrict(addressDistrictText.getText());
+        address.setPhone(addressPhoneText.getText());
+        address.setPostalCode(addressPostcodeText.getText());
+        adDAO.update(address);
+        addressTableView.setItems(FXCollections.observableArrayList(adDAO.readAsList()));
+    }
+
+    @FXML
     void addCustomer(MouseEvent event) {
-        Customer customer = new Customer(customerFirstnametxt.getText(),customerLastnametxt.getText(),customerEmailtxt.getText(), addressChoice.getValue());
-
-//        customer.setFirstName(customerFirstnametxt.getText());
-//        customer.setLastName(customerLastnametxt.getText());
-//        customer.setEmail(customerEmailtxt.getText());
-
+        Customer customer = new Customer(customerFirstnametxt.getText(),customerLastnametxt.getText(),customerEmailtxt.getText(), addressChoice.getValue(), storeChoice.getValue());
         cusDAO.create(customer);
         customerTableView.setItems(FXCollections.observableArrayList(cusDAO.readAsList()));
     }
@@ -134,6 +214,7 @@ public class MainController {
         Customer customer = customerTableView.getSelectionModel().getSelectedItem();
         customerFirstnametxt.setText(customer.getFirstName());
         customerLastnametxt.setText(customer.getLastName());
+        customerEmailtxt.setText(customer.getEmail());
     }
 
     @FXML
@@ -142,6 +223,7 @@ public class MainController {
         customer.setId(customerTableView.getSelectionModel().getSelectedItem().getId());
         customer.setFirstName(customerFirstnametxt.getText());
         customer.setLastName(customerLastnametxt.getText());
+        customer.setEmail(customerEmailtxt.getText());
         cusDAO.update(customer);
         customerTableView.setItems(FXCollections.observableArrayList(cusDAO.readAsList()));
     }
@@ -156,8 +238,10 @@ public class MainController {
         customerCreated.setCellValueFactory(new PropertyValueFactory<>("createDate"));
 
         customerTableView.getItems().addAll(cusDAO.readAsList());
-        customerAdressChoice.addAll(adDAO.readAsList());
-        addressChoice.setItems(customerAdressChoice);
+        customerAdressList.addAll(adDAO.readAsList());
+        customerStoreList.addAll(storeDAO.readAsList());
+        addressChoice.setItems(customerAdressList);
+        storeChoice.setItems(customerStoreList);
     }
 
     @FXML

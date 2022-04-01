@@ -8,7 +8,9 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "staff")
+@Table(name = "staff", indexes = {
+        @Index(name = "idx_fk_store_id", columnList = "store_id"),
+        @Index(name = "idx_fk_address_id", columnList = "address_id")})
 public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +35,7 @@ public class Staff {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "store_id", nullable = false)
-    private Store storeId;
+    private Store test;
 
     @Column(name = "active", nullable = false)
     private Boolean active = false;
@@ -62,7 +64,7 @@ public class Staff {
         this.lastName = lastName;
         this.address = address;
         this.email = email;
-        this.storeId = storeId;
+        this.test = storeId;
     }
 
     public Staff(){
@@ -125,12 +127,12 @@ public class Staff {
         this.active = active;
     }
 
-    public Store getStoreId() {
-        return storeId;
+    public Store getTest() {
+        return test;
     }
 
-    public void setStoreId(Store storeId) {
-        this.storeId = storeId;
+    public void setTest(Store test) {
+        this.test = test;
     }
 
     public String getEmail() {
