@@ -1,12 +1,18 @@
 package com.grupp5.grupp5sakila.entity;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "address")
+@Table(name = "address", indexes = {
+
+        @Index(name = "idx_fk_city_id", columnList = "city_id")
+})
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,17 +32,14 @@ public class Address {
     @JoinColumn(name = "city_id", nullable = false)
     private City city;
 
-    @Column(name = "postal_code", length = 10)
+    @Column(name = "postal_code", length = 50)
     private String postalCode;
 
     @Column(name = "phone", nullable = false, length = 20)
     private String phone;
-
-    @Column(name = "location", nullable = false)
-    private String location;
-
+    @UpdateTimestamp
     @Column(name = "last_update", nullable = false)
-    private Instant lastUpdate;
+    private Timestamp lastUpdate;
 
     @OneToMany(mappedBy = "address")
     private Set<Staff> staff = new LinkedHashSet<>();
@@ -46,6 +49,17 @@ public class Address {
 
     @OneToMany(mappedBy = "address")
     private Set<Customer> customers = new LinkedHashSet<>();
+
+    public Address() {
+    }
+
+    public Address(String address, String district, String postalCode, String phone, City city) {
+        this.address = address;
+        this.district = district;
+        this.postalCode = postalCode;
+        this.phone = phone;
+        this.city = city;
+    }
 
     public Set<Customer> getCustomers() {
         return customers;
@@ -71,20 +85,12 @@ public class Address {
         this.staff = staff;
     }
 
-    public Instant getLastUpdate() {
+    public Timestamp getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Instant lastUpdate) {
+    public void setLastUpdate(Timestamp lastUpdate) {
         this.lastUpdate = lastUpdate;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public String getPhone() {
@@ -145,7 +151,6 @@ public class Address {
 
     @Override
     public String toString() {
-        return   address;
-
+        return address;
     }
 }
