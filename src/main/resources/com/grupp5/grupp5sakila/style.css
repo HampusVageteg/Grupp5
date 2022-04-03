@@ -2,10 +2,20 @@
     -fx-background-color:  #11343a;
 }
 .tab {
-    -fx-text-background-color: #FFFFFF;
-    -fx-pref-width: 50;
+    -fx-pref-width: 75;
+    -fx-pref-height: 30;
+    -fx-text-base-color: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center;
 }
 
 .tab-pane{
     -fx-padding: 0 -1 -1 -1;
+}
+
+.choice-box {
+    -fx-text-base-color: #FFFFFF;
+}
+.choice-box .label {
+    -fx-text-fill: white;
 }

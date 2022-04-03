@@ -25,45 +25,17 @@
                           </columns>
                         </TableView>
                         <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
-                        <Button layoutX="624.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#addActor" text="Add Data" />
-                        <TextField fx:id="actorLastnametxt" layoutX="170.0" layoutY="385.0" promptText="last name" />
-                        <TextField fx:id="actorFirstnametxt" layoutX="8.0" layoutY="385.0" promptText="first name" />
-                        <Button layoutX="537.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#deleteActor" text="Delete Data" />
-                        <Button layoutX="433.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateActor" text="Update Data" />
-                        <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getActors" text="Get Data" />
-                        <Button layoutX="8.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#editCurrentActor" text="Edit selected" />
+                        <Button layoutX="624.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#addActor" style="-fx-background-color: #007A03;" text="Add Data" textFill="WHITE" />
+                        <TextField fx:id="actorLastnametxt" layoutX="170.0" layoutY="385.0" promptText="last name" style="-fx-background-color: #08171A;" />
+                        <TextField fx:id="actorFirstnametxt" layoutX="8.0" layoutY="385.0" promptText="first name" style="-fx-background-color: #08171A;" />
+                        <Button layoutX="537.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#deleteActor" style="-fx-background-color: #7A2008;" text="Delete Data" textFill="WHITE" />
+                        <Button layoutX="442.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateActor" style="-fx-background-color: #747971;" text="Update Data" textFill="WHITE" />
+                        <Button layoutX="368.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getActors" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
+                        <Button layoutX="8.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#editCurrentActor" style="-fx-background-color: #BA8500;" text="Edit selected" textFill="WHITE" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="customerTab" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Customers">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
-                     <children>
-                        <TableView fx:id="customerTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="872.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
-                           <columns>
-                              <TableColumn fx:id="customerFirstname" editable="false" maxWidth="235.0" prefWidth="169.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="First name" />
-                              <TableColumn fx:id="customerLastname" editable="false" maxWidth="301.0" prefWidth="169.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Last name" />
-                              <TableColumn fx:id="customerEmail" editable="false" maxWidth="362.0" prefWidth="200.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Email" />
-                              <TableColumn fx:id="customerLastUpdate" editable="false" maxWidth="453.0" prefWidth="166.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last Updated" />
-                              <TableColumn fx:id="customerCreated" editable="false" maxWidth="453.0" prefWidth="166.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Created" />
-                           </columns>
-                        </TableView>
-                        <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
-                        <Button layoutX="624.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#addCustomer" text="Add Data" />
-                        <TextField fx:id="customerLastnametxt" layoutX="170.0" layoutY="385.0" promptText="last name" />
-                        <TextField fx:id="customerFirstnametxt" layoutX="8.0" layoutY="385.0" promptText="first name" />
-                        <Button layoutX="537.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#deleteCustomer" text="Delete Data" />
-                        <Button layoutX="433.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateCustomer" text="Update Data" />
-                        <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getCustomers" text="Get Data" />
-                        <Button layoutX="8.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#editCurrentCustomer" text="Edit selected" />
-                        <TextField fx:id="customerEmailtxt" layoutX="170.0" layoutY="413.0" promptText="email" />
-                        <ChoiceBox fx:id="addressChoice" layoutX="170.0" layoutY="440.0" prefWidth="150.0" />
-                        <ChoiceBox fx:id="storeChoice" layoutX="170.0" layoutY="476.0" prefWidth="150.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
             <Tab fx:id="addressTab" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-min-width: 20;" text="Address">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
@@ -78,16 +50,156 @@
                            </columns>
                         </TableView>
                         <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
-                        <Button layoutX="624.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#addAddress" text="Add Data" />
-                        <TextField fx:id="addressDistrictText" layoutX="170.0" layoutY="385.0" promptText="district" />
-                        <TextField fx:id="addresstext" layoutX="8.0" layoutY="385.0" promptText="address" />
-                        <Button layoutX="537.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#deleteAddress" text="Delete Data" />
-                        <Button layoutX="433.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateAddress" text="Update Data" />
-                        <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getAddresses" text="Get Data" />
-                        <Button layoutX="8.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#editCurrentAddress" text="Edit selected" />
-                        <TextField fx:id="addressPostcodeText" layoutX="170.0" layoutY="413.0" promptText="postal code" />
-                        <TextField fx:id="addressPhoneText" layoutX="170.0" layoutY="448.0" promptText="phone" />
-                        <ChoiceBox fx:id="cityChoiceBox" layoutX="170.0" layoutY="484.0" prefWidth="150.0" />
+                        <Button layoutX="624.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#addAddress" style="-fx-background-color: #007A03;" text="Add Data" textFill="WHITE" />
+                        <TextField fx:id="addressDistrictText" layoutX="170.0" layoutY="385.0" promptText="district" style="-fx-background-color: #08171A;" />
+                        <TextField fx:id="addresstext" layoutX="8.0" layoutY="385.0" promptText="address" style="-fx-background-color: #08171A;" />
+                        <Button layoutX="537.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#deleteAddress" style="-fx-background-color: #7A2008;" text="Delete Data" textFill="WHITE" />
+                        <Button layoutX="433.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateAddress" style="-fx-background-color: #747971;" text="Update Data" textFill="WHITE" />
+                        <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getAddresses" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
+                        <Button layoutX="8.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#editCurrentAddress" style="-fx-background-color: #BA8500;" text="Edit selected" textFill="WHITE" />
+                        <TextField fx:id="addressPostcodeText" layoutX="170.0" layoutY="413.0" promptText="postal code" style="-fx-background-color: #08171A;" />
+                        <TextField fx:id="addressPhoneText" layoutX="170.0" layoutY="448.0" promptText="phone" style="-fx-background-color: #08171A;" />
+                        <ChoiceBox fx:id="cityChoiceBox" layoutX="170.0" layoutY="484.0" prefWidth="150.0" style="-fx-background-color: #08171A;" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="customerTab" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Customers">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
+                     <children>
+                        <TableView fx:id="customerTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="872.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
+                           <columns>
+                              <TableColumn fx:id="customerFirstname" editable="false" maxWidth="235.0" prefWidth="169.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="First name" />
+                              <TableColumn fx:id="customerLastname" editable="false" maxWidth="301.0" prefWidth="169.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Last name" />
+                              <TableColumn fx:id="customerEmail" editable="false" maxWidth="362.0" prefWidth="200.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Email" />
+                              <TableColumn fx:id="customerLastUpdate" editable="false" maxWidth="453.0" prefWidth="166.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last Updated" />
+                              <TableColumn fx:id="customerCreated" editable="false" maxWidth="453.0" prefWidth="166.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Created" />
+                           </columns>
+                        </TableView>
+                        <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
+                        <Button layoutX="624.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#addCustomer" style="-fx-background-color: #007A03;" text="Add Data" textFill="WHITE" />
+                        <TextField fx:id="customerLastnametxt" layoutX="170.0" layoutY="385.0" promptText="last name" style="-fx-background-color: #08171A;" />
+                        <TextField fx:id="customerFirstnametxt" layoutX="8.0" layoutY="385.0" promptText="first name" style="-fx-background-color: #08171A;" />
+                        <Button layoutX="537.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#deleteCustomer" style="-fx-background-color: #7A2008;" text="Delete Data" textFill="WHITE" />
+                        <Button layoutX="433.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateCustomer" style="-fx-background-color: #747971;" text="Update Data" textFill="WHITE" />
+                        <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getCustomers" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
+                        <Button layoutX="8.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#editCurrentCustomer" style="-fx-background-color: #BA8500;" text="Edit selected" textFill="WHITE" />
+                        <TextField fx:id="customerEmailtxt" layoutX="170.0" layoutY="413.0" promptText="email" style="-fx-background-color: #08171A;" />
+                        <ChoiceBox fx:id="addressChoice" layoutX="170.0" layoutY="440.0" prefWidth="150.0" style="-fx-background-color: #08171A;" />
+                        <ChoiceBox fx:id="storeChoice" layoutX="170.0" layoutY="471.0" prefWidth="150.0" style="-fx-background-color: #08171A;" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-min-width: 20;" text="Films">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
+                     <children>
+                        <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="935.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
+                           <columns>
+                              <TableColumn editable="false" maxWidth="235.0" prefWidth="149.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Address" />
+                              <TableColumn editable="false" maxWidth="321.0" prefWidth="203.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="District" />
+                              <TableColumn editable="false" maxWidth="351.0" prefWidth="184.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Postal code" />
+                              <TableColumn editable="false" maxWidth="408.0" prefWidth="207.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Phone" />
+                              <TableColumn editable="false" maxWidth="607.0" prefWidth="200.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last update" />
+                           </columns>
+                        </TableView>
+                        <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
+                        <Button layoutX="624.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#addAddress" style="-fx-background-color: #007A03;" text="Add Data" textFill="WHITE" />
+                        <TextField layoutX="170.0" layoutY="385.0" promptText="district" style="-fx-background-color: #08171A;" />
+                        <TextField layoutX="8.0" layoutY="385.0" promptText="address" style="-fx-background-color: #08171A;" />
+                        <Button layoutX="537.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#deleteAddress" style="-fx-background-color: #7A2008;" text="Delete Data" textFill="WHITE" />
+                        <Button layoutX="433.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateAddress" style="-fx-background-color: #747971;" text="Update Data" textFill="WHITE" />
+                        <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getAddresses" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
+                        <Button layoutX="8.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#editCurrentAddress" style="-fx-background-color: #BA8500;" text="Edit selected" textFill="WHITE" />
+                        <TextField layoutX="170.0" layoutY="413.0" promptText="postal code" style="-fx-background-color: #08171A;" />
+                        <TextField layoutX="170.0" layoutY="448.0" promptText="phone" style="-fx-background-color: #08171A;" />
+                        <ChoiceBox layoutX="170.0" layoutY="484.0" prefWidth="150.0" style="-fx-background-color: #08171A;" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-min-width: 20;" text="Payment">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
+                     <children>
+                        <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="935.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
+                           <columns>
+                              <TableColumn editable="false" maxWidth="235.0" prefWidth="149.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Address" />
+                              <TableColumn editable="false" maxWidth="321.0" prefWidth="203.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="District" />
+                              <TableColumn editable="false" maxWidth="351.0" prefWidth="184.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Postal code" />
+                              <TableColumn editable="false" maxWidth="408.0" prefWidth="207.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Phone" />
+                              <TableColumn editable="false" maxWidth="607.0" prefWidth="200.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last update" />
+                           </columns>
+                        </TableView>
+                        <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
+                        <Button layoutX="624.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#addAddress" style="-fx-background-color: #007A03;" text="Add Data" textFill="WHITE" />
+                        <TextField layoutX="170.0" layoutY="385.0" promptText="district" style="-fx-background-color: #08171A;" />
+                        <TextField layoutX="8.0" layoutY="385.0" promptText="address" style="-fx-background-color: #08171A;" />
+                        <Button layoutX="537.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#deleteAddress" style="-fx-background-color: #7A2008;" text="Delete Data" textFill="WHITE" />
+                        <Button layoutX="433.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateAddress" style="-fx-background-color: #747971;" text="Update Data" textFill="WHITE" />
+                        <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getAddresses" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
+                        <Button layoutX="8.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#editCurrentAddress" style="-fx-background-color: #BA8500;" text="Edit selected" textFill="WHITE" />
+                        <TextField layoutX="170.0" layoutY="413.0" promptText="postal code" style="-fx-background-color: #08171A;" />
+                        <TextField layoutX="170.0" layoutY="448.0" promptText="phone" style="-fx-background-color: #08171A;" />
+                        <ChoiceBox layoutX="170.0" layoutY="484.0" prefWidth="150.0" style="-fx-background-color: #08171A;" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-min-width: 20;" text="Rental">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
+                     <children>
+                        <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="935.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
+                           <columns>
+                              <TableColumn editable="false" maxWidth="235.0" prefWidth="149.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Address" />
+                              <TableColumn editable="false" maxWidth="321.0" prefWidth="203.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="District" />
+                              <TableColumn editable="false" maxWidth="351.0" prefWidth="184.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Postal code" />
+                              <TableColumn editable="false" maxWidth="408.0" prefWidth="207.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Phone" />
+                              <TableColumn editable="false" maxWidth="607.0" prefWidth="200.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last update" />
+                           </columns>
+                        </TableView>
+                        <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
+                        <Button layoutX="624.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#addAddress" style="-fx-background-color: #007A03;" text="Add Data" textFill="WHITE" />
+                        <TextField layoutX="170.0" layoutY="385.0" promptText="district" style="-fx-background-color: #08171A;" />
+                        <TextField layoutX="8.0" layoutY="385.0" promptText="address" style="-fx-background-color: #08171A;" />
+                        <Button layoutX="537.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#deleteAddress" style="-fx-background-color: #7A2008;" text="Delete Data" textFill="WHITE" />
+                        <Button layoutX="433.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateAddress" style="-fx-background-color: #747971;" text="Update Data" textFill="WHITE" />
+                        <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getAddresses" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
+                        <Button layoutX="8.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#editCurrentAddress" style="-fx-background-color: #BA8500;" text="Edit selected" textFill="WHITE" />
+                        <TextField layoutX="170.0" layoutY="413.0" promptText="postal code" style="-fx-background-color: #08171A;" />
+                        <TextField layoutX="170.0" layoutY="448.0" promptText="phone" style="-fx-background-color: #08171A;" />
+                        <ChoiceBox layoutX="170.0" layoutY="484.0" prefWidth="150.0" style="-fx-background-color: #08171A;" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-min-width: 20;" text="Staff">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
+                     <children>
+                        <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="935.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
+                           <columns>
+                              <TableColumn editable="false" maxWidth="235.0" prefWidth="149.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Address" />
+                              <TableColumn editable="false" maxWidth="321.0" prefWidth="203.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="District" />
+                              <TableColumn editable="false" maxWidth="351.0" prefWidth="184.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Postal code" />
+                              <TableColumn editable="false" maxWidth="408.0" prefWidth="207.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Phone" />
+                              <TableColumn editable="false" maxWidth="607.0" prefWidth="200.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last update" />
+                           </columns>
+                        </TableView>
+                        <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
+                        <Button layoutX="624.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#addAddress" style="-fx-background-color: #007A03;" text="Add Data" textFill="WHITE" />
+                        <TextField layoutX="170.0" layoutY="385.0" promptText="district" style="-fx-background-color: #08171A;" />
+                        <TextField layoutX="8.0" layoutY="385.0" promptText="address" style="-fx-background-color: #08171A;" />
+                        <Button layoutX="537.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#deleteAddress" style="-fx-background-color: #7A2008;" text="Delete Data" textFill="WHITE" />
+                        <Button layoutX="433.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateAddress" style="-fx-background-color: #747971;" text="Update Data" textFill="WHITE" />
+                        <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getAddresses" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
+                        <Button layoutX="8.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#editCurrentAddress" style="-fx-background-color: #BA8500;" text="Edit selected" textFill="WHITE" />
+                        <TextField layoutX="170.0" layoutY="413.0" promptText="postal code" style="-fx-background-color: #08171A;" />
+                        <TextField layoutX="170.0" layoutY="448.0" promptText="phone" style="-fx-background-color: #08171A;" />
+                        <ChoiceBox layoutX="170.0" layoutY="484.0" prefWidth="150.0" style="-fx-background-color: #08171A;" />
                      </children>
                   </AnchorPane>
                </content>
