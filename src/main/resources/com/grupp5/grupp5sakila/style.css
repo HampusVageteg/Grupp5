@@ -13,9 +13,10 @@
     -fx-padding: 0 -1 -1 -1;
 }
 
-.choice-box {
-    -fx-text-base-color: #FFFFFF;
+.choice-box .context-menu {
+    -fx-background-color:  #08171A;
 }
+
 .choice-box .label {
     -fx-text-fill: white;
 }
