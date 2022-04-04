@@ -1,7 +1,11 @@
 package com.grupp5.grupp5sakila.entity;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -18,8 +22,9 @@ public class Rental {
     @Column(name = "rental_id", nullable = false)
     private Integer id;
 
+    @UpdateTimestamp
     @Column(name = "rental_date", nullable = false)
-    private Instant rentalDate;
+    private Timestamp rentalDate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "inventory_id", nullable = false)
@@ -29,15 +34,18 @@ public class Rental {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
+
+
     @Column(name = "return_date")
-    private Instant returnDate;
+    private LocalDate returnDate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "staff_id", nullable = false)
     private Staff staff;
 
+    @UpdateTimestamp
     @Column(name = "last_update", nullable = false)
-    private Instant lastUpdate;
+    private Timestamp lastUpdate;
 
     @OneToMany(mappedBy = "rental")
     private Set<Payment> payments = new LinkedHashSet<>();
@@ -50,11 +58,11 @@ public class Rental {
         this.payments = payments;
     }
 
-    public Instant getLastUpdate() {
+    public Timestamp getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Instant lastUpdate) {
+    public void setLastUpdate(Timestamp lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
@@ -66,11 +74,11 @@ public class Rental {
         this.staff = staff;
     }
 
-    public Instant getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(Instant returnDate) {
+    public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
 
@@ -90,11 +98,11 @@ public class Rental {
         this.inventory = inventory;
     }
 
-    public Instant getRentalDate() {
+    public Timestamp getRentalDate() {
         return rentalDate;
     }
 
-    public void setRentalDate(Instant rentalDate) {
+    public void setRentalDate(Timestamp rentalDate) {
         this.rentalDate = rentalDate;
     }
 

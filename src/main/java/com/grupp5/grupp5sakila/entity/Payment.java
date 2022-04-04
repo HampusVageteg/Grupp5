@@ -1,11 +1,18 @@
 package com.grupp5.grupp5sakila.entity;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "payment")
+@Table(name = "payment", indexes = {
+        @Index(name = "idx_fk_staff_id", columnList = "staff_id"),
+        @Index(name = "idx_fk_customer_id", columnList = "customer_id")
+})
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,35 +32,45 @@ public class Payment {
     private Rental rental;
 
     @Column(name = "amount", nullable = false, precision = 5, scale = 2)
-    private BigDecimal amount;
+    private Double amount;
+
 
     @Column(name = "payment_date", nullable = false)
-    private Instant paymentDate;
+    private Timestamp paymentDate;
 
+    @UpdateTimestamp
     @Column(name = "last_update")
-    private Instant lastUpdate;
+    private Timestamp lastUpdate;
 
-    public Instant getLastUpdate() {
+    public Payment(Double amount) {
+        this.amount = amount;
+    }
+
+    public Payment(){
+
+    }
+
+    public Timestamp getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Instant lastUpdate) {
+    public void setLastUpdate(Timestamp lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
-    public Instant getPaymentDate() {
+    public Timestamp getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Instant paymentDate) {
+    public void setPaymentDate(Timestamp paymentDate) {
         this.paymentDate = paymentDate;
     }
 
-    public BigDecimal getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
