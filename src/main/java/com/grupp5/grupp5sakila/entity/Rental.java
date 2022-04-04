@@ -26,7 +26,7 @@ public class Rental {
     @Column(name = "rental_date", nullable = false)
     private Timestamp rentalDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "inventory_id", nullable = false)
     private Inventory inventory;
 
@@ -110,5 +110,10 @@ public class Rental {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "" + id;
     }
 }

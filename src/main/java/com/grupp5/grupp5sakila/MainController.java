@@ -158,7 +158,8 @@ public class MainController {
     @FXML
     private TableColumn<Film, String> filmTitleCol;
 
-
+    @FXML
+    private TextField filmRatingtxt, filmReleaseYeartxt, filmRentalDurtxt, filmRentalRatetxt, filmReplacementtxt, filmTitletxt, filmLengthtxt, filmSpecialtxt, filmDescripttxt;
 
     @FXML
     private TableColumn<Inventory, Integer> inventoryFilmIdCol;
@@ -232,6 +233,19 @@ public class MainController {
 
     @FXML
     private TableView<Payment> paymentTableView;
+
+
+    @FXML
+    private TableColumn<Payment, Integer> paymentCustIdCol;
+
+    @FXML
+    private TableColumn<Payment, Integer> paymentIdCol;
+
+    @FXML
+    private TableColumn<Payment, Integer> paymentRentalIdCol;
+
+    @FXML
+    private TableColumn<Payment, Integer> paymentStaffIdCol;
 
     @FXML
     private TextField amounttxt;
@@ -402,6 +416,7 @@ public class MainController {
         Customer customer = new Customer(customerFirstnametxt.getText(), customerLastnametxt.getText(), customerEmailtxt.getText(), addressChoice.getValue(), storeChoice.getValue());
         cusDAO.create(customer);
         customerTableView.setItems(FXCollections.observableArrayList(cusDAO.readAsList()));
+
     }
 
     @FXML
@@ -432,11 +447,11 @@ public class MainController {
         customerLastUpdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
         customerCreated.setCellValueFactory(new PropertyValueFactory<>("createDate"));
 
-        customerTableView.getItems().addAll(cusDAO.readAsList());
         customerAdressList.addAll(adDAO.readAsList());
         customerStoreList.addAll(storeDAO.readAsList());
         addressChoice.setItems(customerAdressList);
         storeChoice.setItems(customerStoreList);
+        customerTableView.setItems(FXCollections.observableList(cusDAO.readAsList()));
     }
 
     @FXML
@@ -446,18 +461,21 @@ public class MainController {
         customerTableView.setItems(FXCollections.observableArrayList(cusDAO.readAsList()));
     }
 
-    @FXML
-    void getRental(MouseEvent event) {
-        rentalDate.setCellValueFactory(new PropertyValueFactory<>("rentalDate"));
-        rentalReturndate.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
-        rentalLastupdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
-
-        rentalTableView.setItems(FXCollections.observableArrayList(rentalDAO.readAsList()));
-    }
 
     @FXML
     void addFilm(MouseEvent event) {
-
+        Film film = new Film(filmTitletxt.getText(),
+                filmDescripttxt.getText(),
+                Integer.parseInt(filmReleaseYeartxt.getText()),
+                Integer.parseInt(filmLengthtxt.getText()),
+                Double.parseDouble(filmRentalRatetxt.getText()),
+                Integer.parseInt(filmRentalDurtxt.getText()),
+                Double.parseDouble(filmReplacementtxt.getText()),
+                filmRatingtxt.getText(),
+                filmSpecialtxt.getText());
+        film.setLanguage(new Language(1));
+        filmDAO.create(film);
+        filmTableView.setItems(FXCollections.observableArrayList(filmDAO.readAsList()));
     }
 
     @FXML
@@ -476,6 +494,49 @@ public class MainController {
         filmTableView.setItems(FXCollections.observableArrayList(filmDAO.readAsList()));
     }
 
+    @FXML
+    void deleteFilm(MouseEvent event) {
+        Film film = filmTableView.getSelectionModel().getSelectedItem();
+        filmDAO.delete(film);
+        filmTableView.setItems(FXCollections.observableArrayList(filmDAO.readAsList()));
+    }
+    @FXML
+    void updateFilm(MouseEvent event) {
+        Film film = new Film();
+        film.setId(filmTableView.getSelectionModel().getSelectedItem().getId());
+        film.setTitle(filmTitletxt.getText());
+        film.setDescription(filmDescripttxt.getText());
+        film.setReleaseYear(Integer.valueOf(filmReleaseYeartxt.getText()));
+        film.setRentalDuration(Integer.valueOf(filmRentalDurtxt.getText()));
+        film.setRentalRate(Double.valueOf(filmRentalRatetxt.getText()));
+        film.setLength(Integer.valueOf(filmLengthtxt.getText()));
+        film.setReplacementCost(Double.valueOf(filmReplacementtxt.getText()));
+        film.setRating(filmRatingtxt.getText());
+        film.setSpecialFeatures(filmSpecialtxt.getText());
+        filmDAO.update(film);
+        filmTableView.setItems(FXCollections.observableArrayList(filmDAO.readAsList()));
+    }
+    @FXML
+    void editCurrentFilm(MouseEvent event){
+        Film film = filmTableView.getSelectionModel().getSelectedItem();
+        filmTitletxt.setText(film.getTitle());
+        filmDescripttxt.setText(film.getDescription());
+        filmReleaseYeartxt.setText(String.valueOf(film.getReleaseYear()));
+        filmLengthtxt.setText(String.valueOf(film.getLength()));
+        filmRentalDurtxt.setText(String.valueOf(film.getRentalDuration()));
+        filmRentalRatetxt.setText(String.valueOf(film.getRentalRate()));
+        filmReplacementtxt.setText(String.valueOf(film.getReplacementCost()));
+        filmRatingtxt.setText(film.getRating());
+        filmSpecialtxt.setText(film.getSpecialFeatures());
+
+    }
+    @FXML
+    void getRental(MouseEvent event) {
+        rentalDate.setCellValueFactory(new PropertyValueFactory<>("rentalDate"));
+        rentalReturndate.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
+        rentalLastupdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+        rentalTableView.setItems(FXCollections.observableArrayList(rentalDAO.readAsList()));
+    }
     @FXML
     void addRental(MouseEvent event) {
 
@@ -501,7 +562,10 @@ public class MainController {
         paymentAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         paymentDate.setCellValueFactory(new PropertyValueFactory<>("paymentDate"));
         paymentLastUpdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
-
+        paymentCustIdCol.setCellValueFactory(new PropertyValueFactory<>("customer"));
+        paymentStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("staff"));
+        paymentRentalIdCol.setCellValueFactory(new PropertyValueFactory<>("rental"));
+        paymentIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         paymentTableView.setItems(FXCollections.observableArrayList(payDAO.readAsList()));
 
     }

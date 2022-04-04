@@ -1,5 +1,7 @@
 package com.grupp5.grupp5sakila.entity;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Time;
@@ -46,16 +48,17 @@ public class Film {
     @Column(name = "special_features")
     private String specialFeatures;
 
+    @UpdateTimestamp
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
 
-    @OneToMany(mappedBy = "film")
+    @OneToMany(mappedBy = "film", cascade = CascadeType.REMOVE)
     private Set<Inventory> inventories = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "film")
+    @OneToMany(mappedBy = "film", cascade = CascadeType.REMOVE)
     private Set<FilmActor> filmActors = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "film")
+    @OneToMany(mappedBy = "film", cascade = CascadeType.REMOVE)
     private Set<FilmCategory> filmCategories = new LinkedHashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -65,6 +68,21 @@ public class Film {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "original_language_id")
     private Language originalLanguage;
+
+    public Film() {
+    }
+
+    public Film(String title, String description, Integer releaseYear, Integer rentalDuration, Double rentalRate, Integer length, Double replacementCost, String rating, String specialFeatures) {
+        this.title = title;
+        this.description = description;
+        this.releaseYear = releaseYear;
+        this.rentalDuration = rentalDuration;
+        this.rentalRate = rentalRate;
+        this.length = length;
+        this.replacementCost = replacementCost;
+        this.rating = rating;
+        this.specialFeatures = specialFeatures;
+    }
 
     public Language getOriginalLanguage() {
         return originalLanguage;

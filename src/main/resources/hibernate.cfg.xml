@@ -7,7 +7,9 @@
         <property name="connection.url">jdbc:mysql://localhost/sakila?serverTimezone=UTC</property>
         <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">root93</property>
+
+        <property name="connection.password">root</property>
+
         <property name="connection.pool_size">3</property>
         <property name="current_session_context_class">thread</property>
         <property name="hibernate.enhancer.enableLazyInitialization">true</property>
@@ -34,6 +36,8 @@
         <mapping class="com.grupp5.grupp5sakila.entity.Language"/>
         <mapping class="com.grupp5.grupp5sakila.entity.Category"/>
 
+<!--        <mapping class="com.coolfilm.movieapp.entity.Film"/>-->
+<!--        <mapping class="com.coolfilm.movieapp.entity.FilmFavourite"/>-->
 
     </session-factory>
 </hibernate-configuration>

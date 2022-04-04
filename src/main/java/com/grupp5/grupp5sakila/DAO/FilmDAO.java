@@ -1,5 +1,6 @@
 package com.grupp5.grupp5sakila.DAO;
 
+import com.grupp5.grupp5sakila.entity.Address;
 import com.grupp5.grupp5sakila.entity.City;
 import com.grupp5.grupp5sakila.entity.Film;
 import com.grupp5.grupp5sakila.util.DatabaseSession;
@@ -13,7 +14,10 @@ public class FilmDAO implements DAO<Film>{
 
     @Override
     public void create(Film data) {
+        Session session = dbSession.startSession();
+        session.persist(data);
 
+        dbSession.endSession(session);
     }
 
     @Override
@@ -26,11 +30,30 @@ public class FilmDAO implements DAO<Film>{
 
     @Override
     public void update(Film data) {
+        Session session = dbSession.startSession();
 
+        Film film = session.get(Film.class, data.getId());
+
+        film.setTitle(data.getTitle());
+        film.setDescription(data.getDescription());
+        film.setReleaseYear(data.getReleaseYear());
+        film.setRentalDuration(data.getRentalDuration());
+        film.setRentalRate(data.getRentalRate());
+        film.setLength(data.getLength());
+        film.setReplacementCost(data.getReplacementCost());
+        film.setRating(data.getRating());
+        film.setSpecialFeatures(data.getSpecialFeatures());
+
+        session.update(film);
+
+        dbSession.endSession(session);
     }
 
     @Override
     public void delete(Film data) {
-
+        Session session = dbSession.startSession();
+        Film film = session.get(Film.class, data.getId());
+        session.delete(film);
+        dbSession.endSession(session);
     }
 }

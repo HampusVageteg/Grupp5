@@ -25,6 +25,13 @@ public class Language {
     @OneToMany(mappedBy = "originalLanguage")
     private Set<Film> films = new LinkedHashSet<>();
 
+    public Language() {
+    }
+
+    public Language(Integer id) {
+        this.id = id;
+    }
+
     public Set<Film> getFilms() {
         return films;
     }
@@ -64,4 +71,5 @@ public class Language {
     public void setId(Integer id) {
         this.id = id;
     }
+
 }

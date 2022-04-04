@@ -17,7 +17,7 @@ public class Inventory {
     @Column(name = "inventory_id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "film_id", nullable = false)
     private Film film;
 
@@ -28,7 +28,7 @@ public class Inventory {
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
 
-    @OneToMany(mappedBy = "inventory")
+    @OneToMany(mappedBy = "inventory", cascade = CascadeType.REMOVE)
     private Set<Rental> rentals = new LinkedHashSet<>();
 
     public Set<Rental> getRentals() {

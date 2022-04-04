@@ -44,10 +44,10 @@ public class Customer {
     @Column(name = "last_update")
     private Timestamp lastUpdate;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.REMOVE)
     private Set<Payment> payments = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE)
     private Set<Rental> rentals = new LinkedHashSet<>();
 
     public Customer() {
@@ -148,5 +148,10 @@ public class Customer {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "" + id;
     }
 }
