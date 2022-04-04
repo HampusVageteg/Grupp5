@@ -4,7 +4,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -25,6 +24,18 @@ public class City {
 
     @OneToMany(mappedBy = "city")
     private Set<Address> addresses = new LinkedHashSet<>();
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "country_id", nullable = false)
+    private Country country;
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
 
     public Set<Address> getAddresses() {
         return addresses;
@@ -72,5 +83,4 @@ public class City {
         return city;
     }
 
-    //TODO Reverse Engineering! Migrate other columns to the entity
 }

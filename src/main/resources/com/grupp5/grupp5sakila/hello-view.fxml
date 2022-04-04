@@ -10,9 +10,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="691.0" prefWidth="1037.0" style="-fx-background-color: #11343a;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupp5.grupp5sakila.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="691.0" prefWidth="1149.0" style="-fx-background-color: #11343a;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupp5.grupp5sakila.MainController">
    <children>
-      <TabPane layoutX="53.0" layoutY="32.0" prefHeight="594.0" prefWidth="935.0" style="-fx-background-color: #0b2125;" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="31.0" layoutY="31.0" prefHeight="594.0" prefWidth="1088.0" style="-fx-background-color: #0b2125;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="actorTab" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-min-width: 20;" text="Actor">
             <content>
@@ -65,7 +65,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="customerTab" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Customers">
+            <Tab fx:id="customerTab" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Customer">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
                      <children>
@@ -93,26 +93,31 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-min-width: 20;" text="Films">
+            <Tab style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-min-width: 20;" text="Film">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
                      <children>
-                        <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="935.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
+                        <TableView fx:id="filmTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="1088.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
                            <columns>
-                              <TableColumn editable="false" maxWidth="235.0" prefWidth="149.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Address" />
-                              <TableColumn editable="false" maxWidth="321.0" prefWidth="203.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="District" />
-                              <TableColumn editable="false" maxWidth="351.0" prefWidth="184.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Postal code" />
-                              <TableColumn editable="false" maxWidth="408.0" prefWidth="207.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Phone" />
-                              <TableColumn editable="false" maxWidth="607.0" prefWidth="200.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last update" />
+                              <TableColumn fx:id="filmTitleCol" editable="false" maxWidth="235.0" prefWidth="149.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Title" />
+                              <TableColumn fx:id="filmDescCol" editable="false" maxWidth="321.0" prefWidth="101.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Description" />
+                              <TableColumn fx:id="filmReleaseYearCol" editable="false" maxWidth="351.0" prefWidth="135.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Release Year" />
+                              <TableColumn fx:id="filmRentalDurCol" editable="false" maxWidth="408.0" prefWidth="99.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Rental Duration" />
+                              <TableColumn fx:id="filmRentalRateCol" editable="false" maxWidth="607.0" prefWidth="97.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Rental Rate" />
+                              <TableColumn fx:id="filmLengthCol" editable="false" maxWidth="607.0" prefWidth="65.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Length" />
+                              <TableColumn fx:id="filmReplCostCol" editable="false" maxWidth="607.0" prefWidth="128.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Replacement Cost" />
+                              <TableColumn fx:id="filmRatingCol" editable="false" maxWidth="607.0" prefWidth="77.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Rating" />
+                              <TableColumn fx:id="filmSpecFeaCol" editable="false" maxWidth="607.0" prefWidth="100.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Special Features" />
+                              <TableColumn fx:id="filmLastUpdateCol" editable="false" maxWidth="607.0" prefWidth="135.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last Update" />
                            </columns>
                         </TableView>
                         <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
-                        <Button layoutX="624.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#addAddress" style="-fx-background-color: #007A03;" text="Add Data" textFill="WHITE" />
+                        <Button layoutX="624.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#addFilm" style="-fx-background-color: #007A03;" text="Add Data" textFill="WHITE" />
                         <TextField layoutX="170.0" layoutY="385.0" promptText="district" style="-fx-background-color: #08171A;" />
                         <TextField layoutX="8.0" layoutY="385.0" promptText="address" style="-fx-background-color: #08171A;" />
                         <Button layoutX="537.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#deleteAddress" style="-fx-background-color: #7A2008;" text="Delete Data" textFill="WHITE" />
                         <Button layoutX="433.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateAddress" style="-fx-background-color: #747971;" text="Update Data" textFill="WHITE" />
-                        <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getAddresses" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
+                        <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getFilms" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
                         <Button layoutX="8.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#editCurrentAddress" style="-fx-background-color: #BA8500;" text="Edit selected" textFill="WHITE" />
                         <TextField layoutX="170.0" layoutY="413.0" promptText="postal code" style="-fx-background-color: #08171A;" />
                         <TextField layoutX="170.0" layoutY="448.0" promptText="phone" style="-fx-background-color: #08171A;" />
@@ -125,7 +130,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
                      <children>
-                        <TableView fx:id="paymentTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="935.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
+                        <TableView fx:id="paymentTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="554.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
                            <columns>
                               <TableColumn fx:id="paymentAmount" editable="false" maxWidth="235.0" prefWidth="149.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Amount" />
                               <TableColumn fx:id="paymentDate" editable="false" maxWidth="321.0" prefWidth="203.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Date" />
@@ -193,6 +198,123 @@
                         <TextField fx:id="staffPasswordtxt" layoutX="170.0" layoutY="448.0" promptText="password" style="-fx-background-color: #08171A;" />
                         <TextField fx:id="staffUsernametxt" layoutX="8.0" layoutY="448.0" promptText="username" style="-fx-background-color: #08171A;" />
                         <TextField fx:id="staffEmailtxt" layoutX="8.0" layoutY="413.0" promptText="email" style="-fx-background-color: #08171A;" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-min-width: 20;" text="Store">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
+                     <children>
+                        <TableView fx:id="storeTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="635.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
+                           <columns>
+                              <TableColumn fx:id="storeIdCol" editable="false" maxWidth="235.0" prefWidth="129.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Store ID" />
+                              <TableColumn fx:id="storeManagerStaffIdCol" editable="false" maxWidth="321.0" prefWidth="158.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Manager Staff ID" />
+                              <TableColumn fx:id="storeAddressIdCol" editable="false" maxWidth="351.0" prefWidth="145.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Address ID" />
+                              <TableColumn fx:id="storeLastUpdateCol" editable="false" maxWidth="408.0" prefWidth="201.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last update" />
+                           </columns>
+                        </TableView>
+                        <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
+                        <Button layoutX="624.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#addStore" style="-fx-background-color: #007A03;" text="Add Data" textFill="WHITE" />
+                        <Button layoutX="537.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#deleteStore" style="-fx-background-color: #7A2008;" text="Delete Data" textFill="WHITE" />
+                        <Button layoutX="433.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateStore" style="-fx-background-color: #747971;" text="Update Data" textFill="WHITE" />
+                        <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getStores" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
+                        <Button layoutX="57.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#editCurrentStore" style="-fx-background-color: #BA8500;" text="Edit selected" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-min-width: 20;" text="City">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
+                     <children>
+                        <TableView fx:id="cityTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="598.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
+                           <columns>
+                              <TableColumn fx:id="cityIdCol" editable="false" maxWidth="235.0" prefWidth="129.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="City ID" />
+                              <TableColumn fx:id="cityCol" editable="false" maxWidth="321.0" prefWidth="158.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="City" />
+                              <TableColumn fx:id="cityCountryIdCol" editable="false" maxWidth="351.0" prefWidth="145.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Country ID" />
+                              <TableColumn fx:id="cityLastUpdateCol" editable="false" maxWidth="408.0" prefWidth="164.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
+                        <Button layoutX="624.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#addCity" style="-fx-background-color: #007A03;" text="Add Data" textFill="WHITE" />
+                        <Button layoutX="537.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#deleteCity" style="-fx-background-color: #7A2008;" text="Delete Data" textFill="WHITE" />
+                        <Button layoutX="433.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateCity" style="-fx-background-color: #747971;" text="Update Data" textFill="WHITE" />
+                        <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getCity" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
+                        <Button layoutX="33.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#editCurrentCity" style="-fx-background-color: #BA8500;" text="Edit selected" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-min-width: 20;" text="Inventory">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
+                     <children>
+                        <TableView fx:id="inventoryTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="598.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
+                           <columns>
+                              <TableColumn fx:id="inventoryIdCol" editable="false" maxWidth="235.0" prefWidth="129.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Inventory ID" />
+                              <TableColumn fx:id="inventoryFilmIdCol" editable="false" maxWidth="321.0" prefWidth="158.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Film ID" />
+                              <TableColumn fx:id="inventoryStoreIdCol" editable="false" maxWidth="351.0" prefWidth="145.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Store ID" />
+                              <TableColumn fx:id="inventoryLastUpdateCol" editable="false" maxWidth="408.0" prefWidth="164.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
+                        <Button layoutX="624.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#addInventory" style="-fx-background-color: #007A03;" text="Add Data" textFill="WHITE" />
+                        <Button layoutX="537.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#deleteInventory" style="-fx-background-color: #7A2008;" text="Delete Data" textFill="WHITE" />
+                        <Button layoutX="433.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateInventory" style="-fx-background-color: #747971;" text="Update Data" textFill="WHITE" />
+                        <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getInventory" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
+                        <Button layoutX="33.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#editCurrentInventory" style="-fx-background-color: #BA8500;" text="Edit selected" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-min-width: 20;" text="Country">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
+                     <children>
+                        <TableView fx:id="countryTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="481.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
+                           <columns>
+                              <TableColumn fx:id="countryIdCol" editable="false" maxWidth="235.0" prefWidth="129.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Country ID" />
+                              <TableColumn fx:id="countryCol" editable="false" maxWidth="321.0" prefWidth="158.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Country" />
+                              <TableColumn fx:id="countryLastUpdateCol" editable="false" maxWidth="351.0" prefWidth="192.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
+                        <Button layoutX="14.0" layoutY="352.0" mnemonicParsing="false" onMouseClicked="#getCountry" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-min-width: 20;" text="Language">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
+                     <children>
+                        <TableView fx:id="languageTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="481.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
+                           <columns>
+                              <TableColumn fx:id="languageIdCol" editable="false" maxWidth="235.0" prefWidth="129.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Language ID" />
+                              <TableColumn fx:id="languageNameCol" editable="false" maxWidth="321.0" prefWidth="158.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Name" />
+                              <TableColumn fx:id="languageLastUpdateCol" editable="false" maxWidth="351.0" prefWidth="192.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
+                        <Button layoutX="14.0" layoutY="352.0" mnemonicParsing="false" onMouseClicked="#getLanguage" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-min-width: 20;" text="Category">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
+                     <children>
+                        <TableView fx:id="categoryTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="481.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
+                           <columns>
+                              <TableColumn fx:id="categoryIdCol" editable="false" maxWidth="235.0" prefWidth="129.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Category ID" />
+                              <TableColumn fx:id="categoryNameCol" editable="false" maxWidth="321.0" prefWidth="158.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Name" />
+                              <TableColumn fx:id="categoryLastUpdateCol" editable="false" maxWidth="351.0" prefWidth="192.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
+                        <Button layoutX="14.0" layoutY="352.0" mnemonicParsing="false" onMouseClicked="#getCategory" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
                      </children>
                   </AnchorPane>
                </content>

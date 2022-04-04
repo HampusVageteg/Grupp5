@@ -14,11 +14,6 @@ public class CityDAO implements DAO<City>{
     public void create(City data) {
         Session session = dbSession.startSession();
 
-        City city = new City();
-        city.setCity(data.getCity());
-        city.setAddresses(data.getAddresses());
-        city.setLastUpdate(data.getLastUpdate());
-
         session.persist(data);
 
         dbSession.endSession(session);

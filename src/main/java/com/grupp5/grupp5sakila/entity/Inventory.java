@@ -1,6 +1,7 @@
 package com.grupp5.grupp5sakila.entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -16,16 +17,16 @@ public class Inventory {
     @Column(name = "inventory_id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "film_id", nullable = false)
     private Film film;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;
 
     @Column(name = "last_update", nullable = false)
-    private Instant lastUpdate;
+    private Timestamp lastUpdate;
 
     @OneToMany(mappedBy = "inventory")
     private Set<Rental> rentals = new LinkedHashSet<>();
@@ -38,11 +39,11 @@ public class Inventory {
         this.rentals = rentals;
     }
 
-    public Instant getLastUpdate() {
+    public Timestamp getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Instant lastUpdate) {
+    public void setLastUpdate(Timestamp lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 

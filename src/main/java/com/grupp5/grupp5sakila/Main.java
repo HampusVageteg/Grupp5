@@ -14,7 +14,7 @@ public class Main extends Application {
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1037, 691);
+        Scene scene = new Scene(fxmlLoader.load(), 1149, 691);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         stage.setTitle("Hello!");
         stage.setResizable(false);

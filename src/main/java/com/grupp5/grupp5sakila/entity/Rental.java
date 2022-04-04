@@ -34,8 +34,6 @@ public class Rental {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-
-
     @Column(name = "return_date")
     private LocalDate returnDate;
 

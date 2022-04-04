@@ -10,6 +10,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
@@ -24,13 +26,16 @@ public class MainController {
     RentalDAO rentalDAO = new RentalDAO();
     InventoryDAO inventoryDAO = new InventoryDAO();
     PaymentDAO payDAO = new PaymentDAO();
-
+    CountryDAO countryDAO = new CountryDAO();
+    LanguageDAO languageDAO = new LanguageDAO();
+    CategoryDAO categoryDAO = new CategoryDAO();
+    FilmDAO filmDAO = new FilmDAO();
 
     @FXML
     private TableView<Actor> actorTableView = new TableView<>();
 
-     @FXML
-     private TableView<Customer> customerTableView = new TableView<>();
+    @FXML
+    private TableView<Customer> customerTableView = new TableView<>();
 
     @FXML
     private TableColumn<Actor, String> actorFirstname;
@@ -65,6 +70,18 @@ public class MainController {
     @FXML
     private TableView<Address> addressTableView;
 
+    @FXML
+    private TableColumn<Category, Integer> categoryIdCol;
+
+    @FXML
+    private TableColumn<Category, Timestamp> categoryLastUpdateCol;
+
+    @FXML
+    private TableColumn<Category, String> categoryNameCol;
+
+    @FXML
+    private TableView<Category> categoryTableView;
+
 
     @FXML
     private TableColumn<Customer, String> customerFirstname;
@@ -82,6 +99,84 @@ public class MainController {
     private TableColumn<Customer, Timestamp> customerCreated;
 
     @FXML
+    private TableColumn<City, Integer> cityCol;
+
+    @FXML
+    private TableColumn<City, Integer> cityCountryIdCol;
+
+    @FXML
+    private TableColumn<City, Integer> cityIdCol;
+
+    @FXML
+    private TableColumn<City, Timestamp> cityLastUpdateCol;
+
+    @FXML
+    private TableView<City> cityTableView;
+
+    @FXML
+    private TableColumn<Country, Integer> countryCol;
+
+    @FXML
+    private TableColumn<Country, Integer> countryIdCol;
+
+    @FXML
+    private TableColumn<Country, Timestamp> countryLastUpdateCol;
+
+    @FXML
+    private TableView<Country> countryTableView;
+
+    @FXML
+    private TableColumn<Film, String> filmDescCol;
+
+    @FXML
+    private TableColumn<Film, Timestamp> filmLastUpdateCol;
+
+    @FXML
+    private TableColumn<Film, Integer> filmLengthCol;
+
+    @FXML
+    private TableColumn<Film, String> filmRatingCol;
+
+    @FXML
+    private TableColumn<Film, Integer> filmReleaseYearCol;
+
+    @FXML
+    private TableColumn<Film, Integer> filmRentalDurCol;
+
+    @FXML
+    private TableColumn<Film, Double> filmRentalRateCol;
+
+    @FXML
+    private TableColumn<Film, Double> filmReplCostCol;
+
+    @FXML
+    private TableColumn<Film, String> filmSpecFeaCol;
+
+    @FXML
+    private TableView<Film> filmTableView;
+
+    @FXML
+    private TableColumn<Film, String> filmTitleCol;
+
+
+
+    @FXML
+    private TableColumn<Inventory, Integer> inventoryFilmIdCol;
+
+    @FXML
+    private TableColumn<Inventory, Integer> inventoryIdCol;
+
+    @FXML
+    private TableColumn<Inventory, Timestamp> inventoryLastUpdateCol;
+
+    @FXML
+    private TableColumn<Inventory, Integer> inventoryStoreIdCol;
+
+    @FXML
+    private TableView<Inventory> inventoryTableView;
+
+
+    @FXML
     private ChoiceBox<Address> addressChoice;
 
     @FXML
@@ -90,10 +185,6 @@ public class MainController {
     @FXML
     private ChoiceBox<City> cityChoiceBox;
 
-
-
-
-
     @FXML
     private TextField actorFirstnametxt, actorLastnametxt;
 
@@ -101,7 +192,17 @@ public class MainController {
     private TextField customerFirstnametxt, customerLastnametxt, customerEmailtxt;
 
     @FXML
-    private Tab actorTab;
+    private TableColumn<Language, Integer> languageIdCol;
+
+    @FXML
+    private TableColumn<Language, Timestamp> languageLastUpdateCol;
+
+    @FXML
+    private TableColumn<Language, String> languageNameCol;
+
+    @FXML
+    private TableView<Language> languageTableView;
+
 
     @FXML
     private TableView<Rental> rentalTableView;
@@ -177,6 +278,22 @@ public class MainController {
     @FXML
     private TextField staffUsernametxt;
 
+    @FXML
+    private TableColumn<Store, Integer> storeAddressIdCol;
+
+    @FXML
+    private TableColumn<Store, Integer> storeIdCol;
+
+    @FXML
+    private TableColumn<Store, Timestamp> storeLastUpdateCol;
+
+    @FXML
+    private TableColumn<Store, Integer> storeManagerStaffIdCol;
+
+    @FXML
+    private TableView<Store> storeTableView;
+
+
   /*  @FXML
     private TableView actorTableView;*/
 
@@ -232,7 +349,7 @@ public class MainController {
 
     @FXML
     void addAddress(MouseEvent event) {
-        Address address = new Address(addresstext.getText(),addressDistrictText.getText(),addressPostcodeText.getText(), addressPhoneText.getText(), cityChoiceBox.getValue());
+        Address address = new Address(addresstext.getText(), addressDistrictText.getText(), addressPostcodeText.getText(), addressPhoneText.getText(), cityChoiceBox.getValue());
         adDAO.create(address);
         addressTableView.setItems(FXCollections.observableArrayList(adDAO.readAsList()));
     }
@@ -282,7 +399,7 @@ public class MainController {
 
     @FXML
     void addCustomer(MouseEvent event) {
-        Customer customer = new Customer(customerFirstnametxt.getText(),customerLastnametxt.getText(),customerEmailtxt.getText(), addressChoice.getValue(), storeChoice.getValue());
+        Customer customer = new Customer(customerFirstnametxt.getText(), customerLastnametxt.getText(), customerEmailtxt.getText(), addressChoice.getValue(), storeChoice.getValue());
         cusDAO.create(customer);
         customerTableView.setItems(FXCollections.observableArrayList(cusDAO.readAsList()));
     }
@@ -336,17 +453,39 @@ public class MainController {
         rentalLastupdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
         rentalTableView.setItems(FXCollections.observableArrayList(rentalDAO.readAsList()));
+    }
 
+    @FXML
+    void addFilm(MouseEvent event) {
+
+    }
+
+    @FXML
+    void getFilms(MouseEvent event) {
+        filmTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        filmDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        filmReleaseYearCol.setCellValueFactory(new PropertyValueFactory<>("releaseYear"));
+        filmRentalDurCol.setCellValueFactory(new PropertyValueFactory<>("rentalDuration"));
+        filmRentalRateCol.setCellValueFactory(new PropertyValueFactory<>("rentalRate"));
+        filmLengthCol.setCellValueFactory(new PropertyValueFactory<>("length"));
+        filmReplCostCol.setCellValueFactory(new PropertyValueFactory<>("replacementCost"));
+        filmRatingCol.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        filmSpecFeaCol.setCellValueFactory(new PropertyValueFactory<>("specialFeatures"));
+        filmLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+
+        filmTableView.setItems(FXCollections.observableArrayList(filmDAO.readAsList()));
     }
 
     @FXML
     void addRental(MouseEvent event) {
 
     }
+
     @FXML
     void updateRental(MouseEvent event) {
 
     }
+
     @FXML
     void editCurrentRental(MouseEvent event) {
 
@@ -356,6 +495,7 @@ public class MainController {
     void deleteRental(MouseEvent event) {
 
     }
+
     @FXML
     void getPayment(MouseEvent event) {
         paymentAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
@@ -428,14 +568,128 @@ public class MainController {
     }
 
 
-
     @FXML
     void updateStaff(MouseEvent event) {
 
     }
 
+    @FXML
+    void getStores(MouseEvent event) {
+        storeIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        storeManagerStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("managerStaff"));
+        storeAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+        storeLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
+        storeTableView.setItems(FXCollections.observableArrayList(storeDAO.readAsList()));
 
+    }
 
+    @FXML
+    void addStore(MouseEvent event) {
 
+    }
+
+    @FXML
+    void deleteStore(MouseEvent event) {
+
+    }
+
+    @FXML
+    void editCurrentStore(MouseEvent event) {
+
+    }
+
+    @FXML
+    void updateStore(MouseEvent event) {
+
+    }
+
+    @FXML
+    void getInventory(MouseEvent event) {
+        inventoryIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        inventoryFilmIdCol.setCellValueFactory(new PropertyValueFactory<>("film"));
+        inventoryStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store"));
+        inventoryLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+
+        inventoryTableView.setItems(FXCollections.observableArrayList(inventoryDAO.readAsList()));
+    }
+
+    @FXML
+    void addInventory(MouseEvent event) {
+
+    }
+
+    @FXML
+    void deleteInventory(MouseEvent event) {
+
+    }
+
+    @FXML
+    void editCurrentInventory(MouseEvent event) {
+
+    }
+
+    @FXML
+    void updateInventory(MouseEvent event) {
+    }
+
+    @FXML
+    void getCity(MouseEvent event) {
+        cityIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        cityCol.setCellValueFactory(new PropertyValueFactory<>("city"));
+        cityCountryIdCol.setCellValueFactory(new PropertyValueFactory<>("country"));
+        cityLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+
+        cityTableView.setItems(FXCollections.observableArrayList(cityDAO.readAsList()));
+
+    }
+
+    @FXML
+    void addCity(MouseEvent event) {
+
+    }
+
+    @FXML
+    void deleteCity(MouseEvent event) {
+
+    }
+
+    @FXML
+    void editCurrentCity(MouseEvent event) {
+
+    }
+
+    @FXML
+    void updateCity(MouseEvent event) {
+
+    }
+
+    @FXML
+    void getCountry(MouseEvent event) {
+        countryIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        countryCol.setCellValueFactory(new PropertyValueFactory<>("country"));
+        countryLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+
+        countryTableView.setItems(FXCollections.observableArrayList(countryDAO.readAsList()));
+    }
+
+    @FXML
+    void getLanguage(MouseEvent event) {
+        languageIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        languageNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        languageLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+
+        languageTableView.setItems(FXCollections.observableArrayList(languageDAO.readAsList()));
+
+    }
+
+    @FXML
+    void getCategory(MouseEvent event) {
+        categoryIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        categoryNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        categoryLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+
+        categoryTableView.setItems(FXCollections.observableArrayList(categoryDAO.readAsList()));
+
+    }
 }

@@ -13,24 +13,24 @@ public class Store {
     @Column(name = "store_id", nullable = false)
     private Integer id;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "manager_staff_id", nullable = false)
     private Staff managerStaff;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
 
-    @OneToMany(mappedBy = "store")
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     private Set<Inventory> inventories = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "test")
+    @OneToMany(mappedBy = "test", cascade = CascadeType.ALL)
     private Set<Staff> staff = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "store")
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     private Set<Customer> customers = new LinkedHashSet<>();
 
     public Integer getId() {
@@ -91,8 +91,6 @@ public class Store {
 
     @Override
     public String toString() {
-        return "Store{" +
-                "id=" + id +
-                '}';
+        return  "" + id;
     }
 }

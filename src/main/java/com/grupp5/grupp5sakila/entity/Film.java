@@ -2,6 +2,8 @@ package com.grupp5.grupp5sakila.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -28,13 +30,13 @@ public class Film {
     private Integer rentalDuration;
 
     @Column(name = "rental_rate", nullable = false, precision = 4, scale = 2)
-    private BigDecimal rentalRate;
+    private Double rentalRate;
 
     @Column(name = "length")
     private Integer length;
 
     @Column(name = "replacement_cost", nullable = false, precision = 5, scale = 2)
-    private BigDecimal replacementCost;
+    private Double replacementCost;
 
     @Lob
     @Column(name = "rating")
@@ -45,7 +47,7 @@ public class Film {
     private String specialFeatures;
 
     @Column(name = "last_update", nullable = false)
-    private Instant lastUpdate;
+    private Timestamp lastUpdate;
 
     @OneToMany(mappedBy = "film")
     private Set<Inventory> inventories = new LinkedHashSet<>();
@@ -55,6 +57,30 @@ public class Film {
 
     @OneToMany(mappedBy = "film")
     private Set<FilmCategory> filmCategories = new LinkedHashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "language_id")
+    private Language language;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "original_language_id")
+    private Language originalLanguage;
+
+    public Language getOriginalLanguage() {
+        return originalLanguage;
+    }
+
+    public void setOriginalLanguage(Language originalLanguage) {
+        this.originalLanguage = originalLanguage;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
 
     public Set<FilmCategory> getFilmCategories() {
         return filmCategories;
@@ -80,11 +106,11 @@ public class Film {
         this.inventories = inventories;
     }
 
-    public Instant getLastUpdate() {
+    public Timestamp getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Instant lastUpdate) {
+    public void setLastUpdate(Timestamp lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
@@ -104,11 +130,11 @@ public class Film {
         this.rating = rating;
     }
 
-    public BigDecimal getReplacementCost() {
+    public Double getReplacementCost() {
         return replacementCost;
     }
 
-    public void setReplacementCost(BigDecimal replacementCost) {
+    public void setReplacementCost(Double replacementCost) {
         this.replacementCost = replacementCost;
     }
 
@@ -120,11 +146,11 @@ public class Film {
         this.length = length;
     }
 
-    public BigDecimal getRentalRate() {
+    public Double getRentalRate() {
         return rentalRate;
     }
 
-    public void setRentalRate(BigDecimal rentalRate) {
+    public void setRentalRate(Double rentalRate) {
         this.rentalRate = rentalRate;
     }
 
@@ -166,5 +192,10 @@ public class Film {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return  "" + id;
     }
 }
