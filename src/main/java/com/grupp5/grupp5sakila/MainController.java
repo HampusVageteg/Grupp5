@@ -10,8 +10,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
@@ -30,6 +28,7 @@ public class MainController {
     LanguageDAO languageDAO = new LanguageDAO();
     CategoryDAO categoryDAO = new CategoryDAO();
     FilmDAO filmDAO = new FilmDAO();
+    FilmActorDAO filmActorDAO = new FilmActorDAO();
 
     @FXML
     private TableView<Actor> actorTableView = new TableView<>();
@@ -126,6 +125,12 @@ public class MainController {
     private TableView<Country> countryTableView;
 
     @FXML
+    private ChoiceBox<Actor> filmActorBox;
+
+    @FXML
+    private ChoiceBox<Film> filmChoiceBox;
+
+    @FXML
     private TableColumn<Film, String> filmDescCol;
 
     @FXML
@@ -162,6 +167,18 @@ public class MainController {
     private TextField filmRatingtxt, filmReleaseYeartxt, filmRentalDurtxt, filmRentalRatetxt, filmReplacementtxt, filmTitletxt, filmLengthtxt, filmSpecialtxt, filmDescripttxt;
 
     @FXML
+    private TableColumn<FilmActor, Integer> filmActorFilmIdCol;
+
+    @FXML
+    private TableColumn<FilmActor, Timestamp> filmActorLastupdateCol;
+
+    @FXML
+    private TableView<FilmActor> filmActorTableView;
+
+    @FXML
+    private TableColumn<FilmActor, Integer> filmActoractorIdCol;
+
+    @FXML
     private TableColumn<Inventory, Integer> inventoryFilmIdCol;
 
     @FXML
@@ -175,6 +192,12 @@ public class MainController {
 
     @FXML
     private TableView<Inventory> inventoryTableView;
+
+    @FXML
+    private ChoiceBox<Film> inventoryFilmBox;
+
+    @FXML
+    private ChoiceBox<Store> inventoryStoreBox;
 
 
     @FXML
@@ -204,6 +227,18 @@ public class MainController {
     @FXML
     private TableView<Language> languageTableView;
 
+
+    @FXML
+    private TableColumn<Rental, Integer> rentalCustomerIdCol;
+
+    @FXML
+    private TableColumn<Rental, Integer> rentalIdCol;
+
+    @FXML
+    private TableColumn<Rental, Integer> rentalInventoryIdCol;
+
+    @FXML
+    private TableColumn<Rental, Integer> rentalStaffIdCol;
 
     @FXML
     private TableView<Rental> rentalTableView;
@@ -293,6 +328,15 @@ public class MainController {
     private TextField staffUsernametxt;
 
     @FXML
+    private ChoiceBox<Address> staffAddressBox;
+
+    @FXML
+    private ChoiceBox<Store> staffStoreBox;
+
+    @FXML
+    private TableColumn<Staff, Integer> staffIdCol;
+
+    @FXML
     private TableColumn<Store, Integer> storeAddressIdCol;
 
     @FXML
@@ -307,6 +351,12 @@ public class MainController {
     @FXML
     private TableView<Store> storeTableView;
 
+    @FXML
+    private ChoiceBox<Staff> storeManagerStaffBox;
+
+    @FXML
+    private ChoiceBox<Address> storeAddressBox;
+
 
   /*  @FXML
     private TableView actorTableView;*/
@@ -314,6 +364,14 @@ public class MainController {
     ObservableList<Address> customerAdressList = FXCollections.observableArrayList();
     ObservableList<Store> customerStoreList = FXCollections.observableArrayList();
     ObservableList<City> cityList = FXCollections.observableArrayList();
+    ObservableList<Staff> staffList = FXCollections.observableArrayList();
+    ObservableList<Address> storeAddressList = FXCollections.observableArrayList();
+    ObservableList<Address> staffAddressList = FXCollections.observableArrayList();
+    ObservableList<Store> staffStoreList = FXCollections.observableArrayList();
+    ObservableList<Film> inventoryFilmList = FXCollections.observableArrayList();
+    ObservableList<Store> inventoryStoreList = FXCollections.observableArrayList();
+    ObservableList<Actor> filmActorList = FXCollections.observableArrayList();
+    ObservableList<Film> filmActorFilmList = FXCollections.observableArrayList();
 
     @FXML
     void getActors(MouseEvent event) {
@@ -438,7 +496,6 @@ public class MainController {
         customerTableView.setItems(FXCollections.observableArrayList(cusDAO.readAsList()));
     }
 
-
     @FXML
     void getCustomers(MouseEvent event) {
         customerFirstname.setCellValueFactory(new PropertyValueFactory<Customer, String>("firstName"));
@@ -461,6 +518,14 @@ public class MainController {
         customerTableView.setItems(FXCollections.observableArrayList(cusDAO.readAsList()));
     }
 
+    @FXML
+    void mergeFilmAndActor(MouseEvent event) {
+        FilmActor filmActor = new FilmActor();
+        filmActor.setActor(filmActorBox.getValue());
+        filmActor.setFilm(filmChoiceBox.getValue());
+        filmActorDAO.create(filmActor);
+        //filmActorTableView.setItems(FXCollections.observableArrayList(filmActorDAO.readAsList()));
+    }
 
     @FXML
     void addFilm(MouseEvent event) {
@@ -479,6 +544,15 @@ public class MainController {
     }
 
     @FXML
+    void getFilmActor(MouseEvent event) {
+        filmActoractorIdCol.setCellValueFactory(new PropertyValueFactory<>("actor"));
+        filmActorFilmIdCol.setCellValueFactory(new PropertyValueFactory<>("film"));
+        filmActorLastupdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+
+        filmActorTableView.setItems(FXCollections.observableArrayList(filmActorDAO.readAsList()));
+    }
+
+    @FXML
     void getFilms(MouseEvent event) {
         filmTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         filmDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -492,6 +566,10 @@ public class MainController {
         filmLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
         filmTableView.setItems(FXCollections.observableArrayList(filmDAO.readAsList()));
+        filmActorList.addAll(acDAO.readAsList());
+        filmActorFilmList.addAll(filmDAO.readAsList());
+        filmActorBox.setItems(filmActorList);
+        filmChoiceBox.setItems(filmActorFilmList);
     }
 
     @FXML
@@ -500,6 +578,7 @@ public class MainController {
         filmDAO.delete(film);
         filmTableView.setItems(FXCollections.observableArrayList(filmDAO.readAsList()));
     }
+
     @FXML
     void updateFilm(MouseEvent event) {
         Film film = new Film();
@@ -516,8 +595,9 @@ public class MainController {
         filmDAO.update(film);
         filmTableView.setItems(FXCollections.observableArrayList(filmDAO.readAsList()));
     }
+
     @FXML
-    void editCurrentFilm(MouseEvent event){
+    void editCurrentFilm(MouseEvent event) {
         Film film = filmTableView.getSelectionModel().getSelectedItem();
         filmTitletxt.setText(film.getTitle());
         filmDescripttxt.setText(film.getDescription());
@@ -530,13 +610,19 @@ public class MainController {
         filmSpecialtxt.setText(film.getSpecialFeatures());
 
     }
+
     @FXML
     void getRental(MouseEvent event) {
+        rentalIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         rentalDate.setCellValueFactory(new PropertyValueFactory<>("rentalDate"));
+        rentalInventoryIdCol.setCellValueFactory(new PropertyValueFactory<>("inventory"));
+        rentalCustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("customer"));
         rentalReturndate.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
+        rentalStaffIdCol.setCellValueFactory(new PropertyValueFactory<>("staff"));
         rentalLastupdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
         rentalTableView.setItems(FXCollections.observableArrayList(rentalDAO.readAsList()));
     }
+
     @FXML
     void addRental(MouseEvent event) {
 
@@ -580,7 +666,7 @@ public class MainController {
 
     @FXML
     void deletePayment(MouseEvent event) {
-
+        // Ska verkligen en payment kunna tas bort? Detta görs nog snarare via Rental.
     }
 
     @FXML
@@ -604,6 +690,7 @@ public class MainController {
 
     @FXML
     void getStaff(MouseEvent event) {
+        staffIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         staffFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         staffLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         staffEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -614,27 +701,56 @@ public class MainController {
 
         staffTableView.setItems(FXCollections.observableArrayList(staffDAO.readAsList()));
 
+        staffAddressList.addAll(adDAO.readAsList());
+        staffAddressBox.setItems(staffAddressList);
+        staffStoreList.addAll(storeDAO.readAsList());
+        staffStoreBox.setItems(staffStoreList);
+
     }
 
     @FXML
     void addStaff(MouseEvent event) {
-
+        Staff staff = new Staff(staffFirstnametxt.getText(), staffLastnametxt.getText(), staffAddressBox.getValue(), staffEmailtxt.getText(), staffStoreBox.getValue(), staffUsernametxt.getText(), staffPasswordtxt.getText());
+        staffDAO.create(staff);
+        staffTableView.setItems(FXCollections.observableArrayList(staffDAO.readAsList()));
     }
 
     @FXML
     void deleteStaff(MouseEvent event) {
-
+        Staff staff = staffTableView.getSelectionModel().getSelectedItem();
+        staffDAO.delete(staff);
+        staffTableView.setItems(FXCollections.observableArrayList(staffDAO.readAsList()));
     }
 
     @FXML
     void editCurrentStaff(MouseEvent event) {
+        Staff staff = staffTableView.getSelectionModel().getSelectedItem();
+        staffFirstnametxt.setText(staff.getFirstName());
+        staffLastnametxt.setText(staff.getLastName());
+        staffEmailtxt.setText(staff.getEmail());
+        staffActivetxt.setText(String.valueOf(staff.getActive()));
+        staffUsernametxt.setText(staff.getUsername());
+        staffPasswordtxt.setText(staff.getPassword());
 
     }
 
 
     @FXML
     void updateStaff(MouseEvent event) {
+        Staff staff = new Staff();
+        staff.setId(staffTableView.getSelectionModel().getSelectedItem().getId());
+        staff.setFirstName(staffFirstnametxt.getText());
+        staff.setLastName(staffLastnametxt.getText());
+        staff.setEmail(staffEmailtxt.getText());
+        staff.setActive(Boolean.valueOf(staffActivetxt.getText()));
+        staff.setUsername(staffUsernametxt.getText());
+        staff.setPassword(staffPasswordtxt.getText());
+        staff.setAddress(staffAddressBox.getValue());
+        //Todo Se över denna box.
+        staff.setStoreid(staffStoreBox.getValue());
 
+        staffDAO.update(staff);
+        staffTableView.setItems(FXCollections.observableArrayList(staffDAO.readAsList()));
     }
 
     @FXML
@@ -646,26 +762,43 @@ public class MainController {
 
         storeTableView.setItems(FXCollections.observableArrayList(storeDAO.readAsList()));
 
+        staffList.addAll(staffDAO.readAsList());
+        storeManagerStaffBox.setItems(staffList);
+        storeAddressList.addAll(adDAO.readAsList());
+        storeAddressBox.setItems(storeAddressList);
+
     }
 
     @FXML
     void addStore(MouseEvent event) {
-
+        Store store = new Store(storeManagerStaffBox.getValue(), storeAddressBox.getValue());
+        storeDAO.create(store);
+        storeTableView.setItems(FXCollections.observableArrayList(storeDAO.readAsList()));
     }
 
     @FXML
     void deleteStore(MouseEvent event) {
-
+        Store store = storeTableView.getSelectionModel().getSelectedItem();
+        storeDAO.delete(store);
+        storeTableView.setItems(FXCollections.observableArrayList(storeDAO.readAsList()));
     }
 
     @FXML
     void editCurrentStore(MouseEvent event) {
-
+        Store store = storeTableView.getSelectionModel().getSelectedItem();
+        storeManagerStaffBox.setValue(store.getManagerStaff());
+        storeAddressBox.setValue(store.getAddress());
     }
 
     @FXML
     void updateStore(MouseEvent event) {
+        Store store = new Store();
+        store.setId(storeTableView.getSelectionModel().getSelectedItem().getId());
+        store.setManagerStaff(storeManagerStaffBox.getValue());
+        store.setAddress(storeAddressBox.getValue());
 
+        storeDAO.update(store);
+        storeTableView.setItems(FXCollections.observableArrayList(storeDAO.readAsList()));
     }
 
     @FXML
@@ -676,25 +809,41 @@ public class MainController {
         inventoryLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
         inventoryTableView.setItems(FXCollections.observableArrayList(inventoryDAO.readAsList()));
+
+        inventoryFilmList.addAll(filmDAO.readAsList());
+        inventoryStoreList.addAll(storeDAO.readAsList());
+        inventoryFilmBox.setItems(inventoryFilmList);
+        inventoryStoreBox.setItems(inventoryStoreList);
     }
 
     @FXML
     void addInventory(MouseEvent event) {
-
+        Inventory inventory = new Inventory(inventoryFilmBox.getValue(), inventoryStoreBox.getValue());
+        inventoryDAO.create(inventory);
+        inventoryTableView.setItems(FXCollections.observableArrayList(inventoryDAO.readAsList()));
     }
 
     @FXML
     void deleteInventory(MouseEvent event) {
-
+        // Detta görs via Film tabellen när en film tas bort.
     }
 
     @FXML
     void editCurrentInventory(MouseEvent event) {
-
+        Inventory inventory = inventoryTableView.getSelectionModel().getSelectedItem();
+        inventoryFilmBox.setValue(inventory.getFilm());
+        inventoryStoreBox.setValue(inventory.getStore());
     }
 
     @FXML
     void updateInventory(MouseEvent event) {
+        Inventory inventory = new Inventory();
+        inventory.setId(inventoryTableView.getSelectionModel().getSelectedItem().getId());
+        inventory.setFilm(inventoryFilmBox.getValue());
+        inventory.setStore(inventoryStoreBox.getValue());
+
+        inventoryDAO.update(inventory);
+        inventoryTableView.setItems(FXCollections.observableArrayList(inventoryDAO.readAsList()));
     }
 
     @FXML

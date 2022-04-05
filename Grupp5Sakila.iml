@@ -15,7 +15,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="Grupp5Sakila" />
+          <factory-entry name="Grupp5Sakila" value="772eabc7-1ec4-46a9-b7f0-c600b7e3a01e" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>

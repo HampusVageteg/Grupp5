@@ -1,5 +1,4 @@
 package com.grupp5.grupp5sakila.DAO;
-import com.grupp5.grupp5sakila.entity.Actor;
 
 import java.util.List;
 

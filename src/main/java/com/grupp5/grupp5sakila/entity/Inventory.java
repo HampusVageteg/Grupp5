@@ -1,5 +1,7 @@
 package com.grupp5.grupp5sakila.entity;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -25,11 +27,22 @@ public class Inventory {
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;
 
+    @UpdateTimestamp
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
 
     @OneToMany(mappedBy = "inventory", cascade = CascadeType.REMOVE)
     private Set<Rental> rentals = new LinkedHashSet<>();
+
+    public Inventory(Film film, Store store) {
+        this.film = film;
+        this.store = store;
+    }
+
+    public Inventory(){
+
+    }
+
 
     public Set<Rental> getRentals() {
         return rentals;
@@ -69,5 +82,10 @@ public class Inventory {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return ""+id;
     }
 }

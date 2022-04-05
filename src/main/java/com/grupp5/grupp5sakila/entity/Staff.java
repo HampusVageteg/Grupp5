@@ -35,7 +35,7 @@ public class Staff {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "store_id", nullable = false)
-    private Store test;
+    private Store storeid;
 
     @Column(name = "active", nullable = false)
     private Boolean active = false;
@@ -53,18 +53,20 @@ public class Staff {
     @OneToMany(mappedBy = "staff")
     private Set<Payment> payments = new LinkedHashSet<>();
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "managerStaff")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "managerStaff", cascade = CascadeType.ALL)
     private Store store;
 
     @OneToMany(mappedBy = "staff")
     private Set<Rental> rentals = new LinkedHashSet<>();
 
-    public Staff(String firstName, String lastName, Address address, String email, Store storeId) {
+    public Staff(String firstName, String lastName, Address address, String email, Store storeid, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.email = email;
-        this.test = storeId;
+        this.storeid = storeid;
+        this.username = username;
+        this.password = password;
     }
 
     public Staff(){
@@ -127,12 +129,12 @@ public class Staff {
         this.active = active;
     }
 
-    public Store getTest() {
-        return test;
+    public Store getStoreid() {
+        return storeid;
     }
 
-    public void setTest(Store test) {
-        this.test = test;
+    public void setStoreid(Store test) {
+        this.storeid = test;
     }
 
     public String getEmail() {
@@ -185,6 +187,8 @@ public class Staff {
 
     @Override
     public String toString() {
-        return  "" + id;
+        return ""+id;
     }
+
+
 }

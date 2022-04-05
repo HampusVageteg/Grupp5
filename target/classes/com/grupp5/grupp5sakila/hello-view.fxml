@@ -113,19 +113,22 @@
                         </TableView>
                         <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
                         <Button layoutX="624.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#addFilm" style="-fx-background-color: #007A03;" text="Add Data" textFill="WHITE" />
-                        <TextField fx:id="filmReplacementtxt" layoutX="170.0" layoutY="385.0" promptText="replacement cost" style="-fx-background-color: #08171A;" />
+                        <TextField fx:id="filmReplacementtxt" layoutX="170.0" layoutY="412.0" promptText="replacement cost" style="-fx-background-color: #08171A;" />
                         <TextField fx:id="filmTitletxt" layoutX="8.0" layoutY="385.0" promptText="title" style="-fx-background-color: #08171A;" />
                         <Button layoutX="537.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#deleteFilm" style="-fx-background-color: #7A2008;" text="Delete Data" textFill="WHITE" />
                         <Button layoutX="433.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateFilm" style="-fx-background-color: #747971;" text="Update Data" textFill="WHITE" />
                         <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getFilms" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
                         <Button layoutX="14.0" layoutY="526.0" mnemonicParsing="false" onMouseClicked="#editCurrentFilm" style="-fx-background-color: #BA8500;" text="Edit selected" textFill="WHITE" />
-                        <TextField fx:id="filmRatingtxt" layoutX="170.0" layoutY="413.0" promptText="rating?????" style="-fx-background-color: #08171A;" />
-                        <TextField fx:id="filmSpecialtxt" layoutX="170.0" layoutY="442.0" promptText="special features" style="-fx-background-color: #08171A;" />
+                        <TextField fx:id="filmRatingtxt" layoutX="170.0" layoutY="439.0" promptText="rating" style="-fx-background-color: #08171A;" />
+                        <TextField fx:id="filmSpecialtxt" layoutX="170.0" layoutY="467.0" promptText="special features" style="-fx-background-color: #08171A;" />
                         <TextField fx:id="filmDescripttxt" layoutX="8.0" layoutY="412.0" promptText="description" style="-fx-background-color: #08171A;" />
                         <TextField fx:id="filmReleaseYeartxt" layoutX="8.0" layoutY="439.0" promptText="release year" style="-fx-background-color: #08171A;" />
                         <TextField fx:id="filmRentalDurtxt" layoutX="8.0" layoutY="467.0" promptText="rental duration" style="-fx-background-color: #08171A;" />
-                        <TextField fx:id="filmLengthtxt" layoutX="171.0" layoutY="471.0" promptText="length" style="-fx-background-color: #08171A;" />
+                        <TextField fx:id="filmLengthtxt" layoutX="170.0" layoutY="385.0" promptText="length" style="-fx-background-color: #08171A;" />
                         <TextField fx:id="filmRentalRatetxt" layoutX="8.0" layoutY="495.0" promptText="rental rate" style="-fx-background-color: #08171A;" />
+                        <ChoiceBox fx:id="filmActorBox" layoutX="690.0" layoutY="495.0" prefWidth="150.0" style="-fx-background-color: #08171A;" />
+                        <Button layoutX="860.0" layoutY="468.0" mnemonicParsing="false" onMouseClicked="#mergeFilmAndActor" style="-fx-background-color: #007A03;" text="Merge data" textFill="WHITE" />
+                        <ChoiceBox fx:id="filmChoiceBox" layoutX="690.0" layoutY="468.0" prefWidth="150.0" style="-fx-background-color: #08171A;" />
                      </children>
                   </AnchorPane>
                </content>
@@ -160,11 +163,15 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
                      <children>
-                        <TableView fx:id="rentalTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="935.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
+                        <TableView fx:id="rentalTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="1088.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
                            <columns>
-                              <TableColumn fx:id="rentalDate" editable="false" maxWidth="235.0" prefWidth="149.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Rental date" />
-                              <TableColumn fx:id="rentalReturndate" editable="false" maxWidth="321.0" prefWidth="203.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Return date" />
-                              <TableColumn fx:id="rentalLastupdate" editable="false" maxWidth="351.0" prefWidth="184.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last update" />
+                              <TableColumn fx:id="rentalIdCol" editable="false" maxWidth="351.0" prefWidth="78.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Rental ID" />
+                              <TableColumn fx:id="rentalDate" editable="false" maxWidth="255.0" prefWidth="219.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Rental date" />
+                              <TableColumn fx:id="rentalInventoryIdCol" editable="false" maxWidth="351.0" prefWidth="92.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Inventory ID" />
+                              <TableColumn fx:id="rentalCustomerIdCol" editable="false" maxWidth="351.0" prefWidth="152.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Customer ID" />
+                              <TableColumn fx:id="rentalReturndate" editable="false" maxWidth="363.0" prefWidth="185.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Return date" />
+                              <TableColumn fx:id="rentalStaffIdCol" editable="false" maxWidth="396.0" prefWidth="141.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Staff ID" />
+                              <TableColumn fx:id="rentalLastupdate" editable="false" maxWidth="396.0" prefWidth="219.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last update" />
                            </columns>
                         </TableView>
                         <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
@@ -183,8 +190,9 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
                      <children>
-                        <TableView fx:id="staffTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="935.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
+                        <TableView fx:id="staffTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="1088.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
                            <columns>
+                              <TableColumn fx:id="staffIdCol" editable="false" maxWidth="607.0" prefWidth="151.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Staff ID" />
                               <TableColumn fx:id="staffFirstName" editable="false" maxWidth="235.0" prefWidth="129.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="First name" />
                               <TableColumn fx:id="staffLastName" editable="false" maxWidth="321.0" prefWidth="158.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Last name" />
                               <TableColumn fx:id="staffEmail" editable="false" maxWidth="351.0" prefWidth="145.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Email" />
@@ -206,6 +214,8 @@
                         <TextField fx:id="staffPasswordtxt" layoutX="170.0" layoutY="448.0" promptText="password" style="-fx-background-color: #08171A;" />
                         <TextField fx:id="staffUsernametxt" layoutX="8.0" layoutY="448.0" promptText="username" style="-fx-background-color: #08171A;" />
                         <TextField fx:id="staffEmailtxt" layoutX="8.0" layoutY="413.0" promptText="email" style="-fx-background-color: #08171A;" />
+                        <ChoiceBox fx:id="staffAddressBox" layoutX="170.0" layoutY="484.0" prefWidth="150.0" style="-fx-background-color: #08171A;" />
+                        <ChoiceBox fx:id="staffStoreBox" layoutX="170.0" layoutY="521.0" prefWidth="150.0" style="-fx-background-color: #08171A;" />
                      </children>
                   </AnchorPane>
                </content>
@@ -227,7 +237,9 @@
                         <Button layoutX="537.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#deleteStore" style="-fx-background-color: #7A2008;" text="Delete Data" textFill="WHITE" />
                         <Button layoutX="433.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateStore" style="-fx-background-color: #747971;" text="Update Data" textFill="WHITE" />
                         <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getStores" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
-                        <Button layoutX="57.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#editCurrentStore" style="-fx-background-color: #BA8500;" text="Edit selected" textFill="WHITE" />
+                        <Button layoutX="25.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#editCurrentStore" style="-fx-background-color: #BA8500;" text="Edit selected" textFill="WHITE" />
+                        <ChoiceBox fx:id="storeManagerStaffBox" layoutX="145.0" layoutY="383.0" prefWidth="150.0" style="-fx-background-color: #08171A;" />
+                        <ChoiceBox fx:id="storeAddressBox" layoutX="145.0" layoutY="418.0" prefWidth="150.0" style="-fx-background-color: #08171A;" />
                      </children>
                   </AnchorPane>
                </content>
@@ -272,6 +284,8 @@
                         <Button layoutX="433.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#updateInventory" style="-fx-background-color: #747971;" text="Update Data" textFill="WHITE" />
                         <Button layoutX="348.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#getInventory" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
                         <Button layoutX="33.0" layoutY="383.0" mnemonicParsing="false" onMouseClicked="#editCurrentInventory" style="-fx-background-color: #BA8500;" text="Edit selected" textFill="WHITE" />
+                        <ChoiceBox fx:id="inventoryFilmBox" layoutX="149.0" layoutY="383.0" prefWidth="150.0" style="-fx-background-color: #08171A;" />
+                        <ChoiceBox fx:id="inventoryStoreBox" layoutX="149.0" layoutY="416.0" prefWidth="150.0" style="-fx-background-color: #08171A;" />
                      </children>
                   </AnchorPane>
                </content>
@@ -323,6 +337,23 @@
                         </TableView>
                         <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
                         <Button layoutX="14.0" layoutY="352.0" mnemonicParsing="false" onMouseClicked="#getCategory" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-min-width: 20;" text="Film Actor">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="637.0" style="-fx-hbar-policy: never;">
+                     <children>
+                        <TableView fx:id="filmActorTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="480.0" style="-fx-background-color: #0b2125; -fx-hbar-policy: never; -fx-vbar-policy: never;">
+                           <columns>
+                              <TableColumn fx:id="filmActoractorIdCol" editable="false" maxWidth="235.0" prefWidth="129.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Category ID" />
+                              <TableColumn fx:id="filmActorFilmIdCol" editable="false" maxWidth="321.0" prefWidth="158.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF;" text="Name" />
+                              <TableColumn fx:id="filmActorLastupdateCol" editable="false" maxWidth="351.0" prefWidth="192.0" resizable="false" style="-fx-background-color: #0b2125; -fx-text-background-color: #FFFFFF; -fx-hbar-policy: never;" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <AnchorPane layoutX="-4.099999904632568" layoutY="348.8999938964844" />
+                        <Button layoutX="14.0" layoutY="352.0" mnemonicParsing="false" onMouseClicked="#getFilmActor" style="-fx-background-color: #1A587A;" text="Get Data" textFill="WHITE" />
                      </children>
                   </AnchorPane>
                </content>

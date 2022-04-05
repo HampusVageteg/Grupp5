@@ -1,5 +1,7 @@
 package com.grupp5.grupp5sakila.entity;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.LinkedHashSet;
@@ -13,25 +15,35 @@ public class Store {
     @Column(name = "store_id", nullable = false)
     private Integer id;
 
-    @OneToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "manager_staff_id", nullable = false)
     private Staff managerStaff;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
+    @UpdateTimestamp
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     private Set<Inventory> inventories = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "test", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "storeid", cascade = CascadeType.ALL)
     private Set<Staff> staff = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     private Set<Customer> customers = new LinkedHashSet<>();
+
+    public Store(Staff managerStaff, Address address) {
+        this.managerStaff = managerStaff;
+        this.address = address;
+    }
+
+    public Store(){
+
+    }
 
     public Integer getId() {
         return id;

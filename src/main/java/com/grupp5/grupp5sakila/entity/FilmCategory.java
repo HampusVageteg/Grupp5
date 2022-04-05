@@ -1,6 +1,7 @@
 package com.grupp5.grupp5sakila.entity;
 
 import javax.persistence.*;
+import java.time.Instant;
 
 @Entity
 @Table(name = "film_category")
@@ -16,6 +17,17 @@ public class FilmCategory {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @Column(name = "last_update", nullable = false)
+    private Instant lastUpdate;
+
+    public Instant getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Instant lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
 
     public Category getCategory() {
         return category;
@@ -41,5 +53,4 @@ public class FilmCategory {
         this.id = id;
     }
 
-    //TODO Reverse Engineering! Migrate other columns to the entity
 }

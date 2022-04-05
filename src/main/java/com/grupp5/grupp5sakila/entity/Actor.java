@@ -1,15 +1,14 @@
 package com.grupp5.grupp5sakila.entity;
 
-import org.hibernate.annotations.UpdateTimestamp;
-
 import javax.persistence.*;
-import java.time.Instant;
+import java.sql.Timestamp;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.sql.Timestamp;
 
 @Entity
-@Table(name = "actor")
+@Table(name = "actor", indexes = {
+        @Index(name = "idx_actor_last_name", columnList = "last_name")
+})
 public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,16 +21,11 @@ public class Actor {
     @Column(name = "last_name", nullable = false, length = 45)
     private String lastName;
 
-    @UpdateTimestamp
-    @Column(name = "last_update")
+    @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
 
     @OneToMany(mappedBy = "actor")
     private Set<FilmActor> filmActors = new LinkedHashSet<>();
-
-    public Actor() {
-
-    }
 
     public Set<FilmActor> getFilmActors() {
         return filmActors;
@@ -71,5 +65,10 @@ public class Actor {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return ""+id;
     }
 }

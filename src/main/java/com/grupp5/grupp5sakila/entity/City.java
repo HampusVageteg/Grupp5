@@ -29,6 +29,9 @@ public class City {
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
+    public City() {
+    }
+
     public Country getCountry() {
         return country;
     }
@@ -39,15 +42,6 @@ public class City {
 
     public Set<Address> getAddresses() {
         return addresses;
-    }
-
-    public City() {
-    }
-
-    public City(String city, Timestamp lastUpdate, Set<Address> addresses) {
-        this.city = city;
-        this.lastUpdate = lastUpdate;
-        this.addresses = addresses;
     }
 
     public void setAddresses(Set<Address> addresses) {
