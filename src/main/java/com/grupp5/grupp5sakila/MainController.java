@@ -711,7 +711,7 @@ public class MainController {
         rental.setRentalDate(rentalDatePicker.getValue());
         rental.setInventory(inventory);
         rental.setCustomer(rentalCustomerBox.getValue());
-        rental.setReturnDate(rentalDatePicker.getValue().plusDays(7));
+        rental.setReturnDate(rentalDatePicker.getValue().plusDays(rental.getInventory().getFilm().getRentalDuration()));
         rental.setStaff(rentalStaffBox.getValue());
 
         rentalDAO.create(rental);
