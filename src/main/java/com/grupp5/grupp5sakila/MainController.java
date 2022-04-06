@@ -7,11 +7,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.List;
 
 public class MainController {
 
@@ -128,9 +130,6 @@ public class MainController {
     private ChoiceBox<Actor> filmActorBox;
 
     @FXML
-    private ChoiceBox<Film> filmChoiceBox;
-
-    @FXML
     private TableColumn<Film, String> filmDescCol;
 
     @FXML
@@ -207,6 +206,9 @@ public class MainController {
     private ChoiceBox<Store> storeChoice;
 
     @FXML
+    private TextField searchbar;
+
+    @FXML
     private ChoiceBox<City> cityChoiceBox;
 
     @FXML
@@ -242,6 +244,7 @@ public class MainController {
 
     @FXML
     private TableView<Rental> rentalTableView;
+
     @FXML
     private TableColumn<Rental, Timestamp> rentalDate;
 
@@ -268,7 +271,6 @@ public class MainController {
 
     @FXML
     private TableView<Payment> paymentTableView;
-
 
     @FXML
     private TableColumn<Payment, Integer> paymentCustIdCol;
@@ -371,7 +373,13 @@ public class MainController {
     ObservableList<Film> inventoryFilmList = FXCollections.observableArrayList();
     ObservableList<Store> inventoryStoreList = FXCollections.observableArrayList();
     ObservableList<Actor> filmActorList = FXCollections.observableArrayList();
-    ObservableList<Film> filmActorFilmList = FXCollections.observableArrayList();
+
+    @FXML
+    void searchFilmList(KeyEvent event) {
+        List<Film> listOfFilms = filmDAO.searchFilmList(searchbar.getText());
+
+        filmTableView.setItems(FXCollections.observableArrayList(listOfFilms));
+    }
 
     @FXML
     void getActors(MouseEvent event) {
@@ -521,10 +529,9 @@ public class MainController {
     @FXML
     void mergeFilmAndActor(MouseEvent event) {
         FilmActor filmActor = new FilmActor();
+        filmActor.setFilm(filmTableView.getSelectionModel().getSelectedItem());
         filmActor.setActor(filmActorBox.getValue());
-        filmActor.setFilm(filmChoiceBox.getValue());
         filmActorDAO.create(filmActor);
-        //filmActorTableView.setItems(FXCollections.observableArrayList(filmActorDAO.readAsList()));
     }
 
     @FXML
@@ -567,9 +574,8 @@ public class MainController {
 
         filmTableView.setItems(FXCollections.observableArrayList(filmDAO.readAsList()));
         filmActorList.addAll(acDAO.readAsList());
-        filmActorFilmList.addAll(filmDAO.readAsList());
         filmActorBox.setItems(filmActorList);
-        filmChoiceBox.setItems(filmActorFilmList);
+
     }
 
     @FXML

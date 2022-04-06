@@ -127,8 +127,8 @@
                         <TextField fx:id="filmLengthtxt" layoutX="170.0" layoutY="385.0" promptText="length" style="-fx-background-color: #08171A;" />
                         <TextField fx:id="filmRentalRatetxt" layoutX="8.0" layoutY="495.0" promptText="rental rate" style="-fx-background-color: #08171A;" />
                         <ChoiceBox fx:id="filmActorBox" layoutX="690.0" layoutY="495.0" prefWidth="150.0" style="-fx-background-color: #08171A;" />
-                        <Button layoutX="860.0" layoutY="468.0" mnemonicParsing="false" onMouseClicked="#mergeFilmAndActor" style="-fx-background-color: #007A03;" text="Merge data" textFill="WHITE" />
-                        <ChoiceBox fx:id="filmChoiceBox" layoutX="690.0" layoutY="468.0" prefWidth="150.0" style="-fx-background-color: #08171A;" />
+                        <Button layoutX="860.0" layoutY="468.0" mnemonicParsing="false" onMouseClicked="#mergeFilmAndActor" style="-fx-background-color: #007A03;" text="Add actor to film" textFill="WHITE" />
+                        <TextField fx:id="searchbar" layoutX="691.0" layoutY="467.0" onKeyTyped="#searchFilmList" promptText="search film by title" style="-fx-background-color: #08171A; -fx-text-fill: white;" />
                      </children>
                   </AnchorPane>
                </content>

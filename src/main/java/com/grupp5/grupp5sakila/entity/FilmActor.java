@@ -1,5 +1,7 @@
 package com.grupp5.grupp5sakila.entity;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -9,18 +11,19 @@ import java.sql.Timestamp;
 })
 public class FilmActor {
     @EmbeddedId
-    private FilmActorId actor_Id;
+    private FilmActorId id = new FilmActorId();
 
-    @MapsId("actor_Id")
+    @MapsId("actorId")
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "actor_id", nullable = false)
     private Actor actor;
 
-    @MapsId("film_Id")
+    @MapsId("filmId")
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "film_id", nullable = false)
     private Film film;
 
+    @UpdateTimestamp
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
 
@@ -57,11 +60,11 @@ public class FilmActor {
         this.actor = actor;
     }
 
-    public FilmActorId getActor_Id() {
-        return actor_Id;
+    public FilmActorId getId() {
+        return id;
     }
 
-    public void setActor_Id(FilmActorId id) {
-        this.actor_Id = id;
+    public void setId(FilmActorId id) {
+        this.id = id;
     }
 }

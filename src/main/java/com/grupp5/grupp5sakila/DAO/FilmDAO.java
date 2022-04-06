@@ -54,4 +54,13 @@ public class FilmDAO implements DAO<Film>{
         session.delete(film);
         dbSession.endSession(session);
     }
+
+    public List<Film> searchFilmList(String s) {
+        Session session = dbSession.startSession();
+        List<Film> filmList = session.createQuery("SELECT f FROM Film f WHERE f.title LIKE :s", Film.class)
+                .setParameter("s", "%"+s+"%")
+                .getResultList();
+        dbSession.endSession(session);
+        return filmList;
+    }
 }

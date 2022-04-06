@@ -14,7 +14,7 @@ public class FilmActorDAO implements DAO<FilmActor>{
     public void create(FilmActor data) {
         Session session = dbSession.startSession();
         System.out.println("Hej");
-        session.persist(data);
+        session.merge(data);
         System.out.println("asdasd");
         dbSession.endSession(session);
 
@@ -31,7 +31,7 @@ public class FilmActorDAO implements DAO<FilmActor>{
     @Override
     public void update(FilmActor data) {
         Session session = dbSession.startSession();
-        FilmActor filmActor = session.get(FilmActor.class, data.getActor_Id());
+        FilmActor filmActor = session.get(FilmActor.class, data.getId());
 
         filmActor.setFilm(data.getFilm());
         filmActor.setActor(data.getActor());
