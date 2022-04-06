@@ -12,16 +12,7 @@ public class StaffDAO implements DAO<Staff> {
 
     @Override
     public void create(Staff data) {
-        Staff staff = new Staff();
         Session session = dbSession.startSession();
-
-        staff.setFirstName(data.getFirstName());
-        staff.setLastName(data.getLastName());
-        staff.setEmail(data.getEmail());
-        staff.setActive(data.getActive());
-        staff.setUsername(data.getUsername());
-        staff.setPassword(data.getPassword());
-
         session.persist(data);
         dbSession.endSession(session);
     }

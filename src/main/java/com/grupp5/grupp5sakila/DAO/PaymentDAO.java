@@ -13,7 +13,6 @@ public class PaymentDAO implements DAO<Payment>{
     @Override
     public void create(Payment data) {
         Session session = dbSession.startSession();
-
         session.persist(data);
         dbSession.endSession(session);
 

@@ -12,12 +12,7 @@ public class StoreDAO implements DAO<Store>{
 
     @Override
     public void create(Store data) {
-        Store store = new Store();
         Session session = dbSession.startSession();
-
-        store.setManagerStaff(data.getManagerStaff());
-        store.setAddress(data.getAddress());
-
         session.persist(data);
         dbSession.endSession(session);
     }

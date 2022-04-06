@@ -6,22 +6,14 @@ import org.hibernate.Session;
 
 import java.util.List;
 
-public class CustomerDAO implements DAO<Customer>{
+public class CustomerDAO implements DAO<Customer> {
 
     private final DatabaseSession dbSession = new DatabaseSession();
 
     @Override
     public void create(Customer data) {
-
         Session session = dbSession.startSession();
-
-        Customer customer = new Customer();
-        customer.setFirstName(data.getFirstName());
-        customer.setLastName(data.getLastName());
-        customer.setEmail(data.getEmail());
-
         session.persist(data);
-
         dbSession.endSession(session);
     }
 

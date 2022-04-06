@@ -24,3 +24,8 @@
 .text-field{
     -fx-text-fill: white;
 }
+
+.date-picker .text-field{
+    -fx-text-fill: white;
+    -fx-background-color: #08171A;
+}

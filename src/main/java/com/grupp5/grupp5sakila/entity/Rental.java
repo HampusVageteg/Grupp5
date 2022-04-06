@@ -24,9 +24,9 @@ public class Rental {
 
     @UpdateTimestamp
     @Column(name = "rental_date", nullable = false)
-    private Timestamp rentalDate;
+    private LocalDate rentalDate;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "inventory_id", nullable = false)
     private Inventory inventory;
 
@@ -47,6 +47,18 @@ public class Rental {
 
     @OneToMany(mappedBy = "rental")
     private Set<Payment> payments = new LinkedHashSet<>();
+
+    public Rental(LocalDate rentalDate, Inventory inventory, Customer customer, LocalDate returnDate, Staff staff) {
+        this.rentalDate = rentalDate;
+        this.inventory = inventory;
+        this.customer = customer;
+        this.returnDate = returnDate;
+        this.staff = staff;
+    }
+
+    public Rental(){
+
+    }
 
     public Set<Payment> getPayments() {
         return payments;
@@ -96,11 +108,11 @@ public class Rental {
         this.inventory = inventory;
     }
 
-    public Timestamp getRentalDate() {
+    public LocalDate getRentalDate() {
         return rentalDate;
     }
 
-    public void setRentalDate(Timestamp rentalDate) {
+    public void setRentalDate(LocalDate rentalDate) {
         this.rentalDate = rentalDate;
     }
 

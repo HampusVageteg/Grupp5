@@ -187,7 +187,7 @@ public class Staff {
 
     @Override
     public String toString() {
-        return ""+id;
+        return id + " " + firstName + " " + lastName;
     }
 
 

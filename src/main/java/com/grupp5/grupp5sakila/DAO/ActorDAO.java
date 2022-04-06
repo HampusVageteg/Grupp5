@@ -14,18 +14,9 @@ public class ActorDAO implements DAO<Actor>{
     @Override
     public void create(Actor data) {
 
-        Actor actor = new Actor();
-
-
         Session session = dbSession.startSession();
-
-        actor.setFirstName(data.getFirstName());
-        actor.setLastName(data.getLastName());
-
         session.persist(data);
         dbSession.endSession(session);
-
-
     }
 
     @Override

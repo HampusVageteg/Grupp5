@@ -14,12 +14,7 @@ public class RentalDAO implements DAO<Rental>{
     public void create(Rental data) {
 
         Session session = dbSession.startSession();
-
-        Rental rental = new Rental();
-
-        rental.setRentalDate(data.getRentalDate());
-        rental.setReturnDate(data.getReturnDate());
-
+        session.persist(data);
         dbSession.endSession(session);
     }
 

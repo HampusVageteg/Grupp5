@@ -9,11 +9,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import org.hibernate.type.descriptor.java.LocalDateJavaDescriptor;
 
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 
 public class MainController {
 
@@ -66,7 +69,7 @@ public class MainController {
     private TableColumn<Address, String> addressPostcode;
 
     @FXML
-    private Tab addressTab;
+    private Tab rentalInfoTab;
 
     @FXML
     private TableView<Address> addressTableView;
@@ -261,6 +264,51 @@ public class MainController {
     private TableColumn<Rental, LocalDate> rentalReturndate;
 
     @FXML
+    private DatePicker rentalDatePicker;
+
+    @FXML
+    private ChoiceBox<Customer> rentalCustomerBox;
+
+    @FXML
+    private ChoiceBox<Inventory> rentalInventoryBox;
+
+    @FXML
+    private ChoiceBox<Staff> rentalStaffBox;
+
+    @FXML
+    private TableColumn<Film, String> rentalTitleCol;
+
+    @FXML
+    private TableColumn<Film, String> rentalDescCol;
+
+    @FXML
+    private TableColumn<Film, Integer> rentalDurCol;
+
+    @FXML
+    private TableColumn<Film, Integer> rentalLengthCol;
+
+    @FXML
+    private TableColumn<Film, Double> rentalRateCol;
+
+    @FXML
+    private TableColumn<Film, String> rentalRatingCol;
+
+    @FXML
+    private TableColumn<Film, Integer> rentalReleaseYCol;
+
+    @FXML
+    private TableView<Film> rentalFilmTableView;
+
+    @FXML
+    private TableColumn<Film, Double> rentalReplCostCol;
+
+    @FXML
+    private TableColumn<Film, String> rentalSpecCol;
+
+    @FXML
+    private TextField rentalSearchBar;
+
+    @FXML
     private TableColumn<Payment, Double> paymentAmount;
 
     @FXML
@@ -373,6 +421,9 @@ public class MainController {
     ObservableList<Film> inventoryFilmList = FXCollections.observableArrayList();
     ObservableList<Store> inventoryStoreList = FXCollections.observableArrayList();
     ObservableList<Actor> filmActorList = FXCollections.observableArrayList();
+    ObservableList<Customer> rentalCustomerList = FXCollections.observableArrayList();
+    ObservableList<Inventory> rentalInventoryList = FXCollections.observableArrayList();
+    ObservableList<Staff> rentalStaffList = FXCollections.observableArrayList();
 
     @FXML
     void searchFilmList(KeyEvent event) {
@@ -630,8 +681,42 @@ public class MainController {
     }
 
     @FXML
-    void addRental(MouseEvent event) {
+    void fillRentalFilmTableView(MouseEvent event) {
+        rentalTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        rentalDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        rentalReleaseYCol.setCellValueFactory(new PropertyValueFactory<>("releaseYear"));
+        rentalDurCol.setCellValueFactory(new PropertyValueFactory<>("rentalDuration"));
+        rentalRateCol.setCellValueFactory(new PropertyValueFactory<>("rentalRate"));
+        rentalLengthCol.setCellValueFactory(new PropertyValueFactory<>("length"));
+        rentalReplCostCol.setCellValueFactory(new PropertyValueFactory<>("replacementCost"));
+        rentalRatingCol.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        rentalSpecCol.setCellValueFactory(new PropertyValueFactory<>("specialFeatures"));
+        rentalFilmTableView.setItems(FXCollections.observableArrayList(filmDAO.readAsList()));
 
+        rentalCustomerList.addAll(cusDAO.readAsList());
+        rentalCustomerBox.setItems(rentalCustomerList);
+//        rentalInventoryList.addAll(inventoryDAO.readAsList());
+//        rentalInventoryBox.setItems(rentalInventoryList);
+        rentalStaffList.addAll(staffDAO.readAsList());
+        rentalStaffBox.setItems(rentalStaffList);
+    }
+
+    // Denna metod används för att hyra en film
+    // Return date ska vara 7 dagar efter rental date
+    @FXML
+    void addRentalFilm(MouseEvent event) {
+        Rental rental = new Rental();
+        Inventory inventory = new Inventory(rentalFilmTableView.getSelectionModel().getSelectedItem(), rentalStaffBox.getValue().getStore());
+
+        rental.setRentalDate(rentalDatePicker.getValue());
+        rental.setInventory(inventory);
+        rental.setCustomer(rentalCustomerBox.getValue());
+        rental.setReturnDate(rentalDatePicker.getValue().plusDays(7));
+        rental.setStaff(rentalStaffBox.getValue());
+
+        rentalDAO.create(rental);
+
+        rentalFilmTableView.setItems(FXCollections.observableArrayList(filmDAO.readAsList()));
     }
 
     @FXML
@@ -647,6 +732,13 @@ public class MainController {
     @FXML
     void deleteRental(MouseEvent event) {
 
+    }
+
+    @FXML
+    void rentalSearchFilmList(KeyEvent event) {
+        List<Film> listOfFilms = filmDAO.searchFilmList(rentalSearchBar.getText());
+
+        rentalFilmTableView.setItems(FXCollections.observableArrayList(listOfFilms));
     }
 
     @FXML
@@ -717,6 +809,17 @@ public class MainController {
     @FXML
     void addStaff(MouseEvent event) {
         Staff staff = new Staff(staffFirstnametxt.getText(), staffLastnametxt.getText(), staffAddressBox.getValue(), staffEmailtxt.getText(), staffStoreBox.getValue(), staffUsernametxt.getText(), staffPasswordtxt.getText());
+        //Staff staff = new Staff();
+
+//        staff.setFirstName(staffFirstnametxt.getText());
+//        staff.setLastName(staffLastnametxt.getText());
+//        staff.setAddress(staffAddressBox.getValue());
+//        staff.setEmail(staffEmailtxt.getText());
+//        staff.setUsername(staffUsernametxt.getText());
+//        staff.setPassword(staffPasswordtxt.getText());
+//        Store store = new Store(staff, staff.getAddress());
+//        staff.setStore(store);
+
         staffDAO.create(staff);
         staffTableView.setItems(FXCollections.observableArrayList(staffDAO.readAsList()));
     }

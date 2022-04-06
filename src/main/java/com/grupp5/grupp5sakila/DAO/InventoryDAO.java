@@ -12,13 +12,8 @@ public class InventoryDAO implements DAO<Inventory>{
 
     @Override
     public void create(Inventory data) {
-        Inventory inventory = new Inventory();
         Session session = dbSession.startSession();
-        inventory.setStore(data.getStore());
-        inventory.setFilm(data.getFilm());
-
         session.persist(data);
-
         dbSession.endSession(session);
     }
 
