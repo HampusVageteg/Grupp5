@@ -33,10 +33,13 @@ public class MainController {
     FilmActorDAO filmActorDAO = new FilmActorDAO();
 
     @FXML
-    private TableView<Actor> actorTableView = new TableView<>();
+    private TableView<Actor> actorTableView;
 
     @FXML
-    private TableView<Customer> customerTableView = new TableView<>();
+    private TableView<Customer> customerTableView;
+
+    @FXML
+    private TableColumn<Actor, Integer> actorIdCol;
 
     @FXML
     private TableColumn<Actor, String> actorFirstname;
@@ -54,6 +57,12 @@ public class MainController {
     private TableColumn<Address, String> addressDistrict;
 
     @FXML
+    private TableColumn<Address, Integer> addressCityCol;
+
+    @FXML
+    private TableColumn<Address, Integer> addressIdCol;
+
+    @FXML
     private TextField addressDistrictText, addressPhoneText, addressPostcodeText, addresstext;
 
     @FXML
@@ -64,9 +73,6 @@ public class MainController {
 
     @FXML
     private TableColumn<Address, String> addressPostcode;
-
-    @FXML
-    private Tab rentalInfoTab;
 
     @FXML
     private TableView<Address> addressTableView;
@@ -83,7 +89,6 @@ public class MainController {
     @FXML
     private TableView<Category> categoryTableView;
 
-
     @FXML
     private TableColumn<Customer, String> customerFirstname;
 
@@ -98,6 +103,15 @@ public class MainController {
 
     @FXML
     private TableColumn<Customer, Timestamp> customerCreated;
+
+    @FXML
+    private TableColumn<Customer, Integer> customerAddressIdCol;
+
+    @FXML
+    private TableColumn<Customer, Integer> customerIdCol;
+
+    @FXML
+    private TableColumn<Customer, Integer> customerStoreIdCol;
 
     @FXML
     private TableColumn<City, Integer> cityCol;
@@ -229,7 +243,6 @@ public class MainController {
     @FXML
     private TableView<Language> languageTableView;
 
-
     @FXML
     private TableColumn<Rental, Integer> rentalCustomerIdCol;
 
@@ -249,7 +262,7 @@ public class MainController {
     private TableColumn<Rental, Timestamp> rentalDate;
 
     @FXML
-    private TextField rentalDatetxt;
+    private Label rentalLabel;
 
     @FXML
     private TableColumn<Rental, Timestamp> rentalLastupdate;
@@ -268,9 +281,6 @@ public class MainController {
 
     @FXML
     private ChoiceBox<Customer> rentalCustomerBox;
-
-    @FXML
-    private ChoiceBox<Inventory> rentalInventoryBox;
 
     @FXML
     private ChoiceBox<Staff> rentalStaffBox;
@@ -301,7 +311,7 @@ public class MainController {
 
     @FXML
     private TableColumn<Film, Double> rentalReplCostCol;
-    
+
     @FXML
     private TableColumn<Film, String> rentalSpecCol;
 
@@ -407,10 +417,6 @@ public class MainController {
     @FXML
     private ChoiceBox<Address> storeAddressBox;
 
-
-  /*  @FXML
-    private TableView actorTableView;*/
-
     ObservableList<Address> customerAdressList = FXCollections.observableArrayList();
     ObservableList<Store> customerStoreList = FXCollections.observableArrayList();
     ObservableList<City> cityList = FXCollections.observableArrayList();
@@ -422,7 +428,6 @@ public class MainController {
     ObservableList<Store> inventoryStoreList = FXCollections.observableArrayList();
     ObservableList<Actor> filmActorList = FXCollections.observableArrayList();
     ObservableList<Customer> rentalCustomerList = FXCollections.observableArrayList();
-    ObservableList<Inventory> rentalInventoryList = FXCollections.observableArrayList();
     ObservableList<Staff> rentalStaffList = FXCollections.observableArrayList();
 
     @FXML
@@ -434,8 +439,9 @@ public class MainController {
 
     @FXML
     void getActors(MouseEvent event) {
-        actorFirstname.setCellValueFactory(new PropertyValueFactory<Actor, String>("firstName"));
-        actorLastname.setCellValueFactory(new PropertyValueFactory<Actor, String>("lastName"));
+        actorIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        actorFirstname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        actorLastname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         actorlastUpdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
 
         actorTableView.getItems().addAll(acDAO.readAsList());
@@ -504,8 +510,10 @@ public class MainController {
 
     @FXML
     void getAddresses(MouseEvent event) {
+        addressIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         address.setCellValueFactory(new PropertyValueFactory<>("address"));
         addressDistrict.setCellValueFactory(new PropertyValueFactory<>("district"));
+        addressCityCol.setCellValueFactory(new PropertyValueFactory<>("city"));
         addressPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
         addressPostcode.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         addressLastUpdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
@@ -557,9 +565,12 @@ public class MainController {
 
     @FXML
     void getCustomers(MouseEvent event) {
-        customerFirstname.setCellValueFactory(new PropertyValueFactory<Customer, String>("firstName"));
-        customerLastname.setCellValueFactory(new PropertyValueFactory<Customer, String>("lastName"));
-        customerEmail.setCellValueFactory(new PropertyValueFactory<Customer, String>("email"));
+        customerIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        customerStoreIdCol.setCellValueFactory(new PropertyValueFactory<>("store"));
+        customerFirstname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        customerLastname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        customerEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        customerAddressIdCol.setCellValueFactory(new PropertyValueFactory<>("address"));
         customerLastUpdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
         customerCreated.setCellValueFactory(new PropertyValueFactory<>("createDate"));
 
@@ -713,6 +724,8 @@ public class MainController {
 
         rentalDAO.create(rental);
 
+        rentalLabel.setText("Movie " + rental.getInventory().getFilm().getTitle() + "\nwas succesfully rented!");
+
         rentalFilmTableView.setItems(FXCollections.observableArrayList(filmDAO.readAsList()));
     }
 
@@ -816,17 +829,6 @@ public class MainController {
     @FXML
     void addStaff(MouseEvent event) {
         Staff staff = new Staff(staffFirstnametxt.getText(), staffLastnametxt.getText(), staffAddressBox.getValue(), staffEmailtxt.getText(), staffStoreBox.getValue(), staffUsernametxt.getText(), staffPasswordtxt.getText());
-        //Staff staff = new Staff();
-
-//        staff.setFirstName(staffFirstnametxt.getText());
-//        staff.setLastName(staffLastnametxt.getText());
-//        staff.setAddress(staffAddressBox.getValue());
-//        staff.setEmail(staffEmailtxt.getText());
-//        staff.setUsername(staffUsernametxt.getText());
-//        staff.setPassword(staffPasswordtxt.getText());
-//        Store store = new Store(staff, staff.getAddress());
-//        staff.setStore(store);
-
         staffDAO.create(staff);
         staffTableView.setItems(FXCollections.observableArrayList(staffDAO.readAsList()));
     }
@@ -850,7 +852,6 @@ public class MainController {
 
     }
 
-
     @FXML
     void updateStaff(MouseEvent event) {
         Staff staff = new Staff();
@@ -862,7 +863,6 @@ public class MainController {
         staff.setUsername(staffUsernametxt.getText());
         staff.setPassword(staffPasswordtxt.getText());
         staff.setAddress(staffAddressBox.getValue());
-        //Todo Se över denna box.
         staff.setStoreid(staffStoreBox.getValue());
 
         staffDAO.update(staff);

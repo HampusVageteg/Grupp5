@@ -4,7 +4,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -16,7 +15,7 @@ public class Customer {
     @Column(name = "customer_id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "store_id")
     private Store store;
 
@@ -29,7 +28,7 @@ public class Customer {
     @Column(name = "email", length = 50)
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "address_id")
     private Address address;
 
@@ -152,6 +151,6 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "" + id + firstName + " " + lastName;
+        return id + " " + firstName + " " + lastName;
     }
 }
