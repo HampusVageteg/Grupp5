@@ -9,14 +9,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import org.hibernate.type.descriptor.java.LocalDateJavaDescriptor;
 
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
 
 public class MainController {
 
@@ -258,7 +255,10 @@ public class MainController {
     private TableColumn<Rental, Timestamp> rentalLastupdate;
 
     @FXML
-    private DatePicker rentalRentalDate;
+    private DatePicker rentalReturnDate;
+
+    @FXML
+    private DatePicker rentalDateP;
 
     @FXML
     private TableColumn<Rental, LocalDate> rentalReturndate;
@@ -301,7 +301,7 @@ public class MainController {
 
     @FXML
     private TableColumn<Film, Double> rentalReplCostCol;
-
+    
     @FXML
     private TableColumn<Film, String> rentalSpecCol;
 
@@ -695,14 +695,11 @@ public class MainController {
 
         rentalCustomerList.addAll(cusDAO.readAsList());
         rentalCustomerBox.setItems(rentalCustomerList);
-//        rentalInventoryList.addAll(inventoryDAO.readAsList());
-//        rentalInventoryBox.setItems(rentalInventoryList);
         rentalStaffList.addAll(staffDAO.readAsList());
         rentalStaffBox.setItems(rentalStaffList);
     }
 
     // Denna metod används för att hyra en film
-    // Return date ska vara 7 dagar efter rental date
     @FXML
     void addRentalFilm(MouseEvent event) {
         Rental rental = new Rental();
@@ -721,17 +718,27 @@ public class MainController {
 
     @FXML
     void updateRental(MouseEvent event) {
+        Rental rental = new Rental();
+        rental.setId(rentalTableView.getSelectionModel().getSelectedItem().getId());
+        rental.setRentalDate(rentalDateP.getValue());
+        rental.setReturnDate(rentalReturnDate.getValue());
 
+        rentalDAO.update(rental);
+        rentalTableView.setItems(FXCollections.observableArrayList(rentalDAO.readAsList()));
     }
 
     @FXML
     void editCurrentRental(MouseEvent event) {
-
+        Rental rental = rentalTableView.getSelectionModel().getSelectedItem();
+        rentalDateP.setValue(rental.getRentalDate());
+        rentalReturnDate.setValue(rental.getReturnDate());
     }
 
     @FXML
     void deleteRental(MouseEvent event) {
-
+        Rental rental = rentalTableView.getSelectionModel().getSelectedItem();
+        rentalDAO.delete(rental);
+        rentalTableView.setItems(FXCollections.observableArrayList(rentalDAO.readAsList()));
     }
 
     @FXML

@@ -22,7 +22,6 @@ public class Rental {
     @Column(name = "rental_id", nullable = false)
     private Integer id;
 
-    @UpdateTimestamp
     @Column(name = "rental_date", nullable = false)
     private LocalDate rentalDate;
 
