@@ -1,5 +1,7 @@
 package com.grupp5.grupp5sakila.entity;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.LinkedHashSet;
@@ -21,6 +23,7 @@ public class Actor {
     @Column(name = "last_name", nullable = false, length = 45)
     private String lastName;
 
+    @UpdateTimestamp
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
 

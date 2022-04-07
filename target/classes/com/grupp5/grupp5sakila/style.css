@@ -9,10 +9,6 @@
     -fx-text-alignment: center;
 }
 
-.tab .rentedMovie {
-    -fx-pref-width: 85;
-}
-
 .tab-pane{
     -fx-padding: 0 -1 -1 -1;
 }
