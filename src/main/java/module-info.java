@@ -15,4 +15,6 @@ module com.grupp5.grupp5sakila {
     exports com.grupp5.grupp5sakila.DAO;
     exports com.grupp5.grupp5sakila.entity;
     exports com.grupp5.grupp5sakila;
+    exports com.grupp5.grupp5sakila.ui;
+    opens com.grupp5.grupp5sakila.ui to javafx.fxml;
 }

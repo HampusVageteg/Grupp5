@@ -1,4 +1,4 @@
-package com.grupp5.grupp5sakila;
+package com.grupp5.grupp5sakila.ui;
 
 import com.grupp5.grupp5sakila.DAO.*;
 import com.grupp5.grupp5sakila.entity.*;
@@ -9,7 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -31,6 +30,7 @@ public class MainController {
     CategoryDAO categoryDAO = new CategoryDAO();
     FilmDAO filmDAO = new FilmDAO();
     FilmActorDAO filmActorDAO = new FilmActorDAO();
+    FilmCategoryDAO filmCategoryDAO = new FilmCategoryDAO();
 
     @FXML
     private TableView<Actor> actorTableView;
@@ -145,6 +145,24 @@ public class MainController {
 
     @FXML
     private TableColumn<Film, String> filmDescCol;
+
+    @FXML
+    private TableColumn<FilmCategory, Integer> filmCategoryFilmIdCol;
+
+    @FXML
+    private TableColumn<FilmCategory, Integer> filmCategoryIdCol;
+
+    @FXML
+    private TableColumn<FilmCategory, Timestamp> filmCategoryLastUpdateCol;
+
+    @FXML
+    private TableView<FilmCategory> filmCategoryTableView;
+
+    @FXML
+    private TextField filmCategoryTxt;
+
+    @FXML
+    private ChoiceBox<Category> filmCategoryBox;
 
     @FXML
     private TableColumn<Film, Timestamp> filmLastUpdateCol;
@@ -429,6 +447,7 @@ public class MainController {
     ObservableList<Actor> filmActorList = FXCollections.observableArrayList();
     ObservableList<Customer> rentalCustomerList = FXCollections.observableArrayList();
     ObservableList<Staff> rentalStaffList = FXCollections.observableArrayList();
+    ObservableList<Category> filmCategoryList = FXCollections.observableArrayList();
 
     @FXML
     void searchFilmList(KeyEvent event) {
@@ -597,6 +616,16 @@ public class MainController {
     }
 
     @FXML
+    void getFilmCategory(MouseEvent event) {
+        filmCategoryFilmIdCol.setCellValueFactory(new PropertyValueFactory<>("film"));
+        filmCategoryIdCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        filmCategoryLastUpdateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+
+        filmCategoryTableView.setItems(FXCollections.observableArrayList(filmCategoryDAO.readAsList()));
+
+    }
+
+    @FXML
     void addFilm(MouseEvent event) {
         Film film = new Film(filmTitletxt.getText(),
                 filmDescripttxt.getText(),
@@ -608,7 +637,13 @@ public class MainController {
                 filmRatingtxt.getText(),
                 filmSpecialtxt.getText());
         film.setLanguage(new Language(1));
+
+        FilmCategory filmCategory= new FilmCategory();
+        filmCategory.setCategory(filmCategoryBox.getValue());
+        filmCategory.setFilm(film);
+
         filmDAO.create(film);
+        filmCategoryDAO.create(filmCategory);
         filmTableView.setItems(FXCollections.observableArrayList(filmDAO.readAsList()));
     }
 
@@ -636,7 +671,9 @@ public class MainController {
 
         filmTableView.setItems(FXCollections.observableArrayList(filmDAO.readAsList()));
         filmActorList.addAll(acDAO.readAsList());
+        filmCategoryList.addAll(categoryDAO.readAsList());
         filmActorBox.setItems(filmActorList);
+        filmCategoryBox.setItems(filmCategoryList);
 
     }
 

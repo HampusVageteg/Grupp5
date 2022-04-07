@@ -2,7 +2,7 @@
     -fx-background-color:  #11343a;
 }
 .tab {
-    -fx-pref-width: 75;
+    /*-fx-pref-width: 75;*/
     -fx-pref-height: 30;
     -fx-text-base-color: #FFFFFF;
     -fx-font-weight: bold;

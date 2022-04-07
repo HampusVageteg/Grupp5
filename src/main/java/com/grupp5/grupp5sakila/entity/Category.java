@@ -3,6 +3,7 @@ package com.grupp5.grupp5sakila.entity;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,8 +20,17 @@ public class Category {
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private Set<FilmCategory> filmCategories = new LinkedHashSet<>();
+
+
+    public Category(String name) {
+        this.name = name;
+    }
+
+    public Category() {
+
+    }
 
     public Set<FilmCategory> getFilmCategories() {
         return filmCategories;
@@ -52,5 +62,10 @@ public class Category {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return id + " " + name;
     }
 }

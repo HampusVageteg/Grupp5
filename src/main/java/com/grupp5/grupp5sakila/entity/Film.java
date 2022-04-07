@@ -8,6 +8,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -83,6 +84,8 @@ public class Film {
         this.rating = rating;
         this.specialFeatures = specialFeatures;
     }
+
+
 
     public Language getOriginalLanguage() {
         return originalLanguage;
@@ -211,6 +214,8 @@ public class Film {
     public void setId(Integer id) {
         this.id = id;
     }
+
+
 
     @Override
     public String toString() {

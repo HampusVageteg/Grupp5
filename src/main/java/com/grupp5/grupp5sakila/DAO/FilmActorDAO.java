@@ -13,7 +13,7 @@ public class FilmActorDAO implements DAO<FilmActor>{
     @Override
     public void create(FilmActor data) {
         Session session = dbSession.startSession();
-        session.merge(data);
+        session.persist(data);
         dbSession.endSession(session);
 
     }

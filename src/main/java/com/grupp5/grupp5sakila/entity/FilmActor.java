@@ -27,11 +27,6 @@ public class FilmActor {
     @Column(name = "last_update", nullable = false)
     private Timestamp lastUpdate;
 
-    public FilmActor(Actor actor, Film film) {
-        this.actor = actor;
-        this.film = film;
-    }
-
     public FilmActor(){
 
     }
