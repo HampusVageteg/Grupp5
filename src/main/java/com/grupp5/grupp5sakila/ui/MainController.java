@@ -761,7 +761,7 @@ public class MainController {
 
         rentalDAO.create(rental);
 
-        rentalLabel.setText("Movie " + rental.getInventory().getFilm().getTitle() + "\nwas succesfully rented!");
+        rentalLabel.setText(rental.getInventory().getFilm().getTitle() + "\nwas succesfully rented!");
 
         rentalFilmTableView.setItems(FXCollections.observableArrayList(filmDAO.readAsList()));
     }
